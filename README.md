@@ -1,0 +1,2 @@
+# offloadai-web
+Privacy Page
