@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - OffloadAI</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #0a0a0c; color: #e5e5ea; line-height: 1.6; max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+        h1 { color: #00e5ff; font-size: 28px; margin-bottom: 4px; }
+        h2 { color: #ffffff; font-size: 18px; margin-top: 28px; border-bottom: 1px solid #2c2c2e; padding-bottom: 6px; }
+        p, li { color: #aeaeb2; font-size: 15px; }
+        .date { color: #8e8e93; font-size: 13px; margin-bottom: 32px; }
+        a { color: #00e5ff; text-decoration: none; }
+        .lang-divider { margin: 48px 0; border-top: 1px dashed #3a3a3c; }
+    </style>
+</head>
+<body>
+    <h1>Privacy Policy for OffloadAI</h1>
+    <div class="date">Last Updated: November 2026</div>
+
+    <h2>1. Core Privacy Principle: 100% On-Device Processing</h2>
+    <p>OffloadAI is built with a strict privacy-first architecture. All photo scanning, metadata analysis (creation dates, EXIF coordinates), spatial-temporal clustering, and natural language processing (powered by Apple's on-device FoundationModels and NaturalLanguage frameworks) occur <strong>exclusively on your iOS device</strong>. We do not operate any cloud servers for photo processing, and your photos, videos, or personal library data are never uploaded, transmitted, or stored externally by us.</p>
+
+    <h2>2. Photo Library & External Storage Access</h2>
+    <ul>
+        <li><strong>Photo Library (PhotoKit)</strong>: Used solely to read asset metadata for local folder organization, stream original assets during user-initiated backups, and move backed-up assets to the iOS "Recently Deleted" album upon your explicit confirmation.</li>
+        <li><strong>External Storage (FileManager)</strong>: Used solely to write your selected photos and folder structures to the external USB-C drive or local directory you explicitly authorize via the iOS Document Picker.</li>
+    </ul>
+
+    <h2>3. Location Data & Apple MapKit</h2>
+    <p>OffloadAI does not track your real-time physical location. To resolve GPS coordinates embedded in your photos into readable landmark or venue names, the app sends anonymous coordinate queries to <strong>Apple MapKit APIs</strong> (MKLocalSearch and MKReverseGeocodingRequest). When offline, the app relies on a bundled, read-only local spatial database.</p>
+
+    <h2>4. Speech Recognition & Microphone</h2>
+    <p>When you use the optional voice input feature to search or organize photos, audio is processed via Apple's native SFSpeechRecognizer and AVAudioRecorder for visual audio-level feedback. No voice recordings are saved or transmitted to us.</p>
+
+    <h2>5. In-App Purchases & Quota Sync</h2>
+    <p>All transactions are processed securely through <strong>Apple StoreKit 2</strong>. We do not have access to your credit card or billing details. To preserve your free trial quota and Pro entitlement status across app reinstalls, non-identifiable quota state flags are stored locally in the iOS Keychain, synchronized via your personal iCloud Key-Value Store (NSUbiquitousKeyValueStore), and recorded as a metadata file (<code>.offload_quota_seal.json</code>) inside your backup directory.</p>
+
+    <h2>6. Third-Party Analytics & Tracking</h2>
+    <p>OffloadAI contains <strong>zero</strong> third-party advertising SDKs, tracking pixels, or behavioral analytics frameworks.</p>
+
+    <h2>7. Contact Us</h2>
+    <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:support@offloadai.space">support@offloadai.space</a></p>
+
+    <div class="lang-divider"></div>
+
+    <h1>OffloadAI 私隱政策</h1>
+    <div class="date">最後更新：2026年11月</div>
+    <p>OffloadAI 採用嚴格的「100% 裝置端本地運算」架構。所有相片掃描、EXIF 時空聚類分析、自然語言處理及外置硬碟寫入均完全在你的 iPhone 上離線或本地執行。我們絕不設任何雲端伺服器收集、上傳或儲存你的相片、影片、語音或個人資料。地標查名僅透過 Apple 原生 MapKit 進行匿名座標解析；內購交易完全由 Apple StoreKit 2 處理。如有查詢，請聯絡：<a href="mailto:support@offloadai.space">support@offloadai.space</a></p>
+</body>
+</html>
