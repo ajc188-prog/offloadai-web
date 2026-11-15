@@ -360,8 +360,8 @@
                 </div>
                 
                 <!-- CENTER CANVAS: 8-Level Dandelion Universe -->
-                <div class="order-1 lg:order-2 w-full flex-1 h-[460px] sm:h-[520px] lg:h-[558px] relative">
-                    <div id="canvas-stage" class="stage-glass w-full h-full rounded-[42px] relative overflow-hidden select-none">
+                <div class="order-1 lg:order-2 w-full lg:flex-1 h-[440px] sm:h-[520px] lg:h-[558px] min-h-[440px] relative">
+                    <div id="canvas-stage" class="stage-glass w-full h-full min-h-[440px] rounded-[42px] relative overflow-hidden select-none">
                         
                         <!-- Layer 1: Dual-Rail Neon Tension Lines & Stardust Particles -->
                         <canvas id="fireworks-canvas" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></canvas>
@@ -1236,6 +1236,9 @@
                 }
                 
                 window.addEventListener('resize', handleResize);
+                if (typeof ResizeObserver !== 'undefined') {
+                    new ResizeObserver(() => handleResize()).observe(stageEl);
+                }
                 
                 // --- E. Loops.so Form Submission ---
                 const waitlistForm = document.getElementById('waitlist-form');
