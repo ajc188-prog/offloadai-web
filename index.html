@@ -303,11 +303,11 @@
                 </h1>
             </div>
             
-            <!-- 2. Triptych Stage: Left iPhone (558px) | Center 8-Level Universe Canvas (558px) | Right iPhone (558px) -->
-            <div class="w-full flex flex-col lg:flex-row items-center justify-center gap-6 xl:gap-7 mb-5">
+            <!-- 2. Triptych Stage: Mobile (Left Phone -> Canvas + 2x2 Dock -> Right Phone) | Desktop (Left Phone | Canvas + Single-Row Dock | Right Phone) -->
+            <div class="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-7 lg:gap-6 xl:gap-7 mb-10">
                 
-                <!-- LEFT IPHONE: Act I Welcome Screenshot Slot (4-Lang x Light/Dark with automatic base fallback) -->
-                <div class="order-2 lg:order-1 flex-shrink-0">
+                <!-- LEFT IPHONE: Act I Welcome Screenshot Slot -->
+                <div class="order-1 flex-shrink-0">
                     <div class="iphone-18-frame">
                         <div class="hw-btn btn-action"></div>
                         <div class="hw-btn btn-vol-up"></div>
@@ -321,11 +321,6 @@
                                     <div class="camera-lens"></div>
                                 </div>
                                 
-                                <!-- ==========================================
-                                🖼️ ANTHONY 左機截圖位 (自動隨 4語 + Light/Dark 切換)
-                                優先讀取: blob_screen_<en|tc|yue|sc>_<light|dark>.png
-                                若未放分語系圖，自動回退讀取: blob_screen_light.png / blob_screen_dark.png
-                                ========================================== -->
                                 <img
                                     id="blob-img-light"
                                     src="blob_screen_en_light.png"
@@ -341,7 +336,6 @@
                                         onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='blob_screen_dark.png';}else{this.style.display='none';}"
                                         >
                                         
-                                        <!-- Absolute Fallback UI -->
                                         <div class="absolute top-3.5 inset-x-6 flex justify-between text-[10px] font-semibold opacity-80 z-10">
                                             <span>9:41</span>
                                             <span>5G • 100%</span>
@@ -359,31 +353,49 @@
                     </div>
                 </div>
                 
-                <!-- CENTER CANVAS: 8-Level Dandelion Universe -->
-                <div class="order-1 lg:order-2 w-full lg:flex-1 h-[440px] sm:h-[520px] lg:h-[558px] min-h-[440px] relative">
-                    <div id="canvas-stage" class="stage-glass w-full h-full min-h-[440px] rounded-[42px] relative overflow-hidden select-none">
-                        
-                        <!-- Layer 1: Dual-Rail Neon Tension Lines & Stardust Particles -->
-                        <canvas id="fireworks-canvas" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></canvas>
-                        
-                        <!-- Layer 2: True Liquid Glass Folder Cards -->
-                        <div id="camera-world" class="absolute inset-0 w-full h-full z-20 pointer-events-none origin-top-left"></div>
-                        
-                        <!-- Bottom-Left Circular Magic Wand Button (🪄) -->
-                        <button id="firework-btn" type="button" class="absolute bottom-4 left-4 z-30 w-9 h-9 rounded-full bg-black/10 dark:bg-white/10 hover:bg-cyan-500/25 dark:hover:bg-cyan-400/25 backdrop-blur-xl border border-black/10 dark:border-white/20 flex items-center justify-center text-sm shadow-lg transition-all active:scale-90" title="Re-Trigger Firework Layout">
-                            🪄
-                        </button>
-                        
-                        <!-- Bottom-Right Micro Zoom Controls (+ / - / Fit) -->
-                        <div class="absolute bottom-4 right-4 z-30 flex items-center gap-1 bg-black/10 dark:bg-white/10 backdrop-blur-xl p-1 rounded-full border border-black/10 dark:border-white/20 shadow-lg">
-                            <button id="zoom-in-btn" type="button" class="w-7 h-7 rounded-full text-xs font-mono font-bold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Zoom In">+</button>
-                            <button id="zoom-out-btn" type="button" class="w-7 h-7 rounded-full text-xs font-mono font-bold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Zoom Out">&minus;</button>
-                            <button id="zoom-fit-btn" type="button" class="px-2.5 h-7 rounded-full text-[11px] font-mono font-semibold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Fit Entire Universe">Fit</button>
+                <!-- CENTER COLUMN: 8-Level Dandelion Universe + Attached 4-Month Dock -->
+                <div class="order-2 w-full lg:flex-1 flex flex-col items-center">
+                    <div class="w-full h-[440px] sm:h-[520px] lg:h-[558px] min-h-[440px] relative">
+                        <div id="canvas-stage" class="stage-glass w-full h-full min-h-[440px] rounded-[42px] relative overflow-hidden select-none">
+                            
+                            <!-- Layer 1: Dual-Rail Neon Tension Lines & Stardust Particles -->
+                            <canvas id="fireworks-canvas" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></canvas>
+                            
+                            <!-- Layer 2: True Liquid Glass Folder Cards -->
+                            <div id="camera-world" class="absolute inset-0 w-full h-full z-20 pointer-events-none origin-top-left"></div>
+                            
+                            <!-- Bottom-Left Circular Magic Wand Button (🪄) -->
+                            <button id="firework-btn" type="button" class="absolute bottom-4 left-4 z-30 w-9 h-9 rounded-full bg-black/10 dark:bg-white/10 hover:bg-cyan-500/25 dark:hover:bg-cyan-400/25 backdrop-blur-xl border border-black/10 dark:border-white/20 flex items-center justify-center text-sm shadow-lg transition-all active:scale-90" title="Re-Trigger Firework Layout">
+                                🪄
+                            </button>
+                            
+                            <!-- Bottom-Right Micro Zoom Controls (+ / - / Fit) -->
+                            <div class="absolute bottom-4 right-4 z-30 flex items-center gap-1 bg-black/10 dark:bg-white/10 backdrop-blur-xl p-1 rounded-full border border-black/10 dark:border-white/20 shadow-lg">
+                                <button id="zoom-in-btn" type="button" class="w-7 h-7 rounded-full text-xs font-mono font-bold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Zoom In">+</button>
+                                <button id="zoom-out-btn" type="button" class="w-7 h-7 rounded-full text-xs font-mono font-bold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Zoom Out">&minus;</button>
+                                <button id="zoom-fit-btn" type="button" class="px-2.5 h-7 rounded-full text-[11px] font-mono font-semibold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Fit Entire Universe">Fit</button>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <!-- 3. 4-Month Control Dock (2x2 Grid on Mobile, Single Row on Desktop) -->
+                    <div class="w-full max-w-md sm:max-w-none grid grid-cols-2 sm:flex sm:flex-wrap lg:flex-nowrap items-center justify-center gap-2 lg:gap-2.5 mt-4 z-20">
+                        <button id="btn-cluster-feb" data-cluster="feb" class="cluster-btn w-full sm:w-auto truncate px-2.5 sm:px-3.5 lg:px-4 py-2.5 sm:py-2 rounded-full text-[11px] sm:text-[13px] font-semibold transition-all bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.35)]">
+                            👑 Feb '24 (3,602 photos)
+                        </button>
+                        <button id="btn-cluster-may" data-cluster="may" class="cluster-btn w-full sm:w-auto truncate px-2.5 sm:px-3.5 lg:px-4 py-2.5 sm:py-2 rounded-full text-[11px] sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
+                            🗼 May '24 (2,872 photos)
+                        </button>
+                        <button id="btn-cluster-jul" data-cluster="jul" class="cluster-btn w-full sm:w-auto truncate px-2.5 sm:px-3.5 lg:px-4 py-2.5 sm:py-2 rounded-full text-[11px] sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
+                            🏰 Jul '24 (1,395 photos)
+                        </button>
+                        <button id="btn-cluster-sep" data-cluster="sep" class="cluster-btn w-full sm:w-auto truncate px-2.5 sm:px-3.5 lg:px-4 py-2.5 sm:py-2 rounded-full text-[11px] sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
+                            ⛵ Sep '24 (2,492 photos)
+                        </button>
                     </div>
                 </div>
                 
-                <!-- RIGHT IPHONE: Act V Export Screenshot Slot (4-Lang with automatic fallback to export_screen.png) -->
+                <!-- RIGHT IPHONE: Act V Export Screenshot Slot -->
                 <div class="order-3 flex-shrink-0">
                     <div class="iphone-18-frame">
                         <div class="hw-btn btn-action"></div>
@@ -398,11 +410,6 @@
                                     <div class="camera-lens"></div>
                                 </div>
                                 
-                                <!-- ==========================================
-                                🖼️ ANTHONY 右機截圖位 (自動隨 4語 切換，並回退至單一 export_screen.png)
-                                優先讀取: export_screen_<en|tc|yue|sc>.png
-                                若未放分語系圖，自動回退讀取: export_screen.png
-                                ========================================== -->
                                 <img
                                     id="export-img"
                                     src="export_screen_en.png"
@@ -411,7 +418,6 @@
                                     onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='export_screen.png';}else{this.style.display='none';}"
                                     >
                                     
-                                    <!-- Absolute Fallback UI -->
                                     <div class="absolute top-3.5 inset-x-6 flex justify-between text-[10px] font-semibold opacity-80 z-10">
                                         <span>9:41</span>
                                         <span>5G • 100%</span>
@@ -429,22 +435,6 @@
                     </div>
                 </div>
                 
-            </div>
-            
-            <!-- 3. Single-Row 4-Month Control Dock -->
-            <div class="w-full max-w-5xl mx-auto flex flex-wrap md:flex-nowrap items-center justify-center gap-2 lg:gap-3 mb-10 z-20">
-                <button id="btn-cluster-feb" data-cluster="feb" class="cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.35)]">
-                    👑 Feb '24 (3,602 photos)
-                </button>
-                <button id="btn-cluster-may" data-cluster="may" class="cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
-                    🗼 May '24 (2,872 photos)
-                </button>
-                <button id="btn-cluster-jul" data-cluster="jul" class="cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
-                    🏰 Jul '24 (1,395 photos)
-                </button>
-                <button id="btn-cluster-sep" data-cluster="sep" class="cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
-                    ⛵ Sep '24 (2,492 photos)
-                </button>
             </div>
             
             <!-- 4. H2 Sub-headline -->
@@ -1203,9 +1193,9 @@
                     btn.addEventListener('click', () => {
                         currentKey = btn.dataset.cluster;
                         document.querySelectorAll('.cluster-btn').forEach(b => {
-                            b.className = 'cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10';
+                            b.className = 'cluster-btn w-full sm:w-auto truncate px-2.5 sm:px-3.5 lg:px-4 py-2.5 sm:py-2 rounded-full text-[11px] sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10';
                         });
-                        btn.className = 'cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.35)]';
+                        btn.className = 'cluster-btn w-full sm:w-auto truncate px-2.5 sm:px-3.5 lg:px-4 py-2.5 sm:py-2 rounded-full text-[11px] sm:text-[13px] font-semibold transition-all bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.35)]';
                         initStardust();
                         renderDOMCards();
                         triggerFireworkBurst();
