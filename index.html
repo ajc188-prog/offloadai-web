@@ -1,0 +1,1277 @@
+<!--
+// ==========================================
+// File: index.html
+// Project: OffloadAI
+// Version: 6.2.0
+// Description: Production-ready Apple-like Single-Page HTML with full 4-Language localization (简|粵|繁|EN) for all copy, nodes, and iPhone screenshots (with automatic fallback to base filenames). Includes True Liquid Glass Folder Cards, Dual-Rail Neon Tension Lines, AABB Auto-Fit Camera, Real Metadata-Verified Jul & Sep Galaxy Trees, Apple-compliant copy, and Loops.so integration.
+// Created by Anthony on 17/8/2026.
+// ==========================================
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>OffloadAI | Stop sorting files. Start reliving memories.</title>
+                <meta name="description" content="Map your chaotic photo library into interactive 4D neural fireworks. Export originals losslessly into date-and-place-organized folders on your external drive. Safely reclaim iPhone storage. 100% On-Device. Zero Cloud.">
+                    
+                    <!-- Inter & JetBrains Mono Fonts (San Francisco / SF Mono fallback) -->
+                    <link rel="preconnect" href="https://fonts.googleapis.com">
+                        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+                                
+                                <!-- Tailwind CSS (CDN for zero-build setup) -->
+                                <script src="https://cdn.tailwindcss.com"></script>
+                                
+                                <script>
+                                    tailwind.config = {
+                                        darkMode: 'class',
+                                        theme: {
+                                            extend: {
+                                                fontFamily: {
+                                                    sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'San Francisco', 'Segoe UI', 'sans-serif'],
+                                                    mono: ['JetBrains Mono', 'SF Mono', 'Menlo', 'monospace'],
+                                                },
+                                                colors: {
+                                                    'offload-black': '#000000',
+                                                    'offload-gray-dark': '#1d1d1f',
+                                                    'offload-gray-light': '#fbfbfd',
+                                                }
+                                            }
+                                        }
+                                    };
+                                    
+                                    if (localStorage.getItem('color-theme') === 'light') {
+                                        document.documentElement.classList.remove('dark');
+                                    } else {
+                                        document.documentElement.classList.add('dark');
+                                    }
+                                </script>
+                                
+                                <style>
+                                    body {
+                                        transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                                        overflow-x: hidden;
+                                    }
+                                    
+                                    /* ==========================================
+                                     1. Center Interactive Stage Glassmorphism
+                                     ========================================== */
+                                    .stage-glass {
+                                        background: rgba(244, 244, 248, 0.88);
+                                        backdrop-filter: blur(24px) saturate(180%);
+                                        -webkit-backdrop-filter: blur(24px) saturate(180%);
+                                        border: 1px solid rgba(0, 0, 0, 0.08);
+                                        box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+                                    }
+                                    .dark .stage-glass {
+                                        background: #030305;
+                                        border: 1px solid rgba(255, 255, 255, 0.12);
+                                        box-shadow: 0 30px 80px -20px rgba(0, 229, 255, 0.08), 0 25px 60px -15px rgba(0, 0, 0, 0.95), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+                                    }
+                                    
+                                    /* ==========================================
+                                     2. iPhone 18 Pro Hardware Frame (Fixed Absolute Inset)
+                                     Light Mode: Space Black / Dark Gray Titanium
+                                     Dark Mode: Brushed Natural Silver Titanium
+                                     ========================================== */
+                                    .iphone-18-frame {
+                                        position: relative;
+                                        width: 268px;
+                                        height: 558px;
+                                        border-radius: 46px;
+                                        transition: background 0.35s ease, box-shadow 0.35s ease;
+                                        background: linear-gradient(145deg, #3a3a3f 0%, #18181b 50%, #27272c 100%);
+                                        box-shadow:
+                                        0 25px 50px rgba(0, 0, 0, 0.22),
+                                        0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+                                    }
+                                    .dark .iphone-18-frame {
+                                        background: linear-gradient(145deg, #d4d4d8 0%, #71717a 48%, #a1a1aa 100%);
+                                        box-shadow:
+                                        0 30px 60px rgba(0, 0, 0, 0.85),
+                                        0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+                                        0 0 20px rgba(255, 255, 255, 0.08);
+                                    }
+                                    
+                                    .iphone-bezel {
+                                        position: absolute;
+                                        inset: 3.5px;
+                                        background: #050505;
+                                        border-radius: 42.5px;
+                                        box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.18);
+                                    }
+                                    
+                                    .iphone-screen {
+                                        position: absolute;
+                                        inset: 8px;
+                                        background: radial-gradient(circle at 50% 38%, #161824 0%, #06070a 100%);
+                                        border-radius: 35px;
+                                        overflow: hidden;
+                                        color: #ffffff;
+                                    }
+                                    
+                                    .dynamic-island {
+                                        position: absolute;
+                                        top: 10px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        width: 78px;
+                                        height: 21px;
+                                        background: #000000;
+                                        border-radius: 16px;
+                                        z-index: 30;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-end;
+                                        padding-right: 6px;
+                                        box-shadow: 0 1px 2px rgba(255, 255, 255, 0.08);
+                                    }
+                                    
+                                    .camera-lens {
+                                        width: 8px;
+                                        height: 8px;
+                                        border-radius: 50%;
+                                        background: radial-gradient(circle at 35% 35%, #2b4c7e, #0a1122 65%, #000 100%);
+                                        border: 1px solid #1a1a1a;
+                                    }
+                                    
+                                    .hw-btn {
+                                        position: absolute;
+                                        background: linear-gradient(to bottom, #45454c, #1f1f23);
+                                        border-radius: 3px;
+                                    }
+                                    .dark .hw-btn {
+                                        background: linear-gradient(to bottom, #d4d4d8, #71717a);
+                                    }
+                                    .btn-action { left: -2.5px; top: 90px; width: 2.5px; height: 21px; }
+                                    .btn-vol-up { left: -2.5px; top: 126px; width: 2.5px; height: 38px; }
+                                    .btn-vol-down { left: -2.5px; top: 174px; width: 2.5px; height: 38px; }
+                                    .btn-power { right: -2.5px; top: 138px; width: 2.5px; height: 56px; }
+                                    .btn-camera-control {
+                                        position: absolute;
+                                        right: -2px;
+                                        top: 298px;
+                                        width: 2px;
+                                        height: 42px;
+                                        background: #27272a;
+                                        border-radius: 2px;
+                                        box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.25);
+                                    }
+                                    .dark .btn-camera-control {
+                                        background: #52525b;
+                                    }
+                                    
+                                    .home-indicator {
+                                        position: absolute;
+                                        bottom: 7px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        width: 96px;
+                                        height: 3.5px;
+                                        background: rgba(255, 255, 255, 0.8);
+                                        border-radius: 4px;
+                                        z-index: 30;
+                                    }
+                                    
+                                    /* ==========================================
+                                     3. True Liquid Glass Folder Card (1:1 Port of SVGFolderCard.swift)
+                                     ========================================== */
+                                    .liquid-node {
+                                        position: absolute;
+                                        transform-origin: center center;
+                                        cursor: pointer;
+                                        user-select: none;
+                                        will-change: transform, left, top;
+                                    }
+                                    .liquid-node:hover {
+                                        z-index: 100 !important;
+                                    }
+                                    .folder-card-box {
+                                        position: relative;
+                                        width: 100px;
+                                        height: 75px;
+                                        transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.22s ease;
+                                    }
+                                    .liquid-node:hover .folder-card-box {
+                                        transform: scale(1.14);
+                                    }
+                                    
+                                    /* Layer A: FolderBackShape Glass (Top tab y:0..17 refracts background lines clearly) */
+                                    .folder-back-glass {
+                                        position: absolute;
+                                        inset: 0;
+                                        clip-path: path('M 0,65 L 0,10 Q 0,0 10,0 L 28,0 Q 33,0 36,4.5 Q 38.5,8.5 44,8.5 L 90,8.5 Q 100,8.5 100,18.5 L 100,65 Q 100,75 90,75 L 10,75 Q 0,75 0,65 Z');
+                                        background: linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(235, 235, 242, 0.32) 100%);
+                                        backdrop-filter: blur(12px) saturate(190%);
+                                        -webkit-backdrop-filter: blur(12px) saturate(190%);
+                                    }
+                                    .dark .folder-back-glass {
+                                        background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(20, 20, 28, 0.28) 100%);
+                                        backdrop-filter: blur(12px) saturate(200%);
+                                        -webkit-backdrop-filter: blur(12px) saturate(200%);
+                                    }
+                                    
+                                    /* Layer B: 90x50 Recessed Photo Thumbnail + Blurred Glow + FolderFrontShape Glass Pocket */
+                                    .folder-photo-pocket {
+                                        position: absolute;
+                                        inset: 0;
+                                        clip-path: path('M 0,27 Q 0,17 10,17 L 90,17 Q 100,17 100,27 L 100,65 Q 100,75 90,75 L 10,75 Q 0,75 0,65 Z');
+                                        background: rgba(255, 255, 255, 0.22);
+                                        backdrop-filter: blur(8px) saturate(160%);
+                                        -webkit-backdrop-filter: blur(8px) saturate(160%);
+                                        overflow: hidden;
+                                    }
+                                    .dark .folder-photo-pocket {
+                                        background: rgba(18, 18, 24, 0.42);
+                                        backdrop-filter: blur(8px) saturate(180%);
+                                        -webkit-backdrop-filter: blur(8px) saturate(180%);
+                                    }
+                                    
+                                    /* Layer C: Specular SVG Rim Overlay */
+                                    .folder-rim-svg {
+                                        position: absolute;
+                                        inset: 0;
+                                        width: 100px;
+                                        height: 75px;
+                                        pointer-events: none;
+                                        overflow: visible;
+                                    }
+                                    
+                                    /* Layer D: Top-Right Expand Badge (- circle from SVGFolderCard.swift) */
+                                    .folder-expand-badge {
+                                        position: absolute;
+                                        top: 2px;
+                                        right: -4px;
+                                        width: 16px;
+                                        height: 16px;
+                                        border-radius: 999px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 11px;
+                                        font-weight: 900;
+                                        color: #ffffff;
+                                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+                                        border: 1px solid rgba(255, 255, 255, 0.45);
+                                        z-index: 10;
+                                    }
+                                </style>
+                            </head>
+    
+    <body class="antialiased bg-offload-gray-light text-offload-gray-dark dark:bg-offload-black dark:text-[#f5f5f7] selection:bg-cyan-500/20 selection:text-cyan-600 dark:selection:bg-cyan-400/30 dark:selection:text-white min-h-screen flex flex-col justify-between">
+        
+        <!-- Top Navigation: Brand + Light/Dark App Icon Left | 简|粵|繁|EN + Theme Toggle Right -->
+        <header class="w-full max-w-[1440px] mx-auto px-5 sm:px-8 pt-5 pb-2 flex justify-between items-center z-50">
+            <div class="flex items-center gap-2.5">
+                <!-- 🖼️ ANTHONY 左上角 App Icon (Light / Dark Mode 雙圖片位) -->
+                <img src="app_icon_light.png" alt="OffloadAI Icon" class="w-7 h-7 rounded-[7px] object-cover block dark:hidden shadow-sm border border-black/10" onerror="this.style.display='none'">
+                    <img src="app_icon_dark.png" alt="OffloadAI Icon" class="w-7 h-7 rounded-[7px] object-cover hidden dark:block shadow-[0_0_12px_rgba(0,229,255,0.25)] border border-white/15" onerror="this.style.display='none'">
+                        <span class="font-semibold tracking-tight text-sm md:text-base">OffloadAI</span>
+                    </div>
+            
+            <!-- Right Controls: 简 | 粵 | 繁 | EN (Default EN) + Theme Toggle -->
+            <div class="flex items-center gap-2.5">
+                <div class="flex items-center gap-0.5 bg-black/5 dark:bg-white/10 backdrop-blur-xl p-1 rounded-full border border-black/5 dark:border-white/10">
+                    <button data-lang="sc" class="lang-btn px-2.5 py-1 rounded-full text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-all">简</button>
+                    <span class="text-gray-300 dark:text-white/20 text-[10px]">|</span>
+                    <button data-lang="yue" class="lang-btn px-2.5 py-1 rounded-full text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-all">粵</button>
+                    <span class="text-gray-300 dark:text-white/20 text-[10px]">|</span>
+                    <button data-lang="tc" class="lang-btn px-2.5 py-1 rounded-full text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-all">繁</button>
+                    <span class="text-gray-300 dark:text-white/20 text-[10px]">|</span>
+                    <button data-lang="en" class="lang-btn px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-400 text-black shadow-sm transition-all">EN</button>
+                </div>
+                
+                <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/10 rounded-full text-sm p-2.5 transition-colors border border-black/5 dark:border-white/10" aria-label="Toggle Dark/Light Mode">
+                    <svg class="w-4 h-4 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg class="w-4 h-4 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="flex-grow flex flex-col items-center justify-center px-4 sm:px-8 pt-2 pb-14 w-full max-w-[1440px] mx-auto">
+            
+            <!-- 1. H1 Headline (Full i18n + descender-safe padding) -->
+            <div class="max-w-4xl mx-auto text-center z-10 mb-5 md:mb-7">
+                <h1 id="i18n-h1" class="text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight leading-[1.15] pb-2 bg-gradient-to-b from-gray-950 via-gray-800 to-gray-500 dark:from-white dark:via-gray-100 dark:to-[#86868b] text-transparent bg-clip-text">
+                    Stop sorting files.<br>Start reliving memories.
+                </h1>
+            </div>
+            
+            <!-- 2. Triptych Stage: Left iPhone (558px) | Center 8-Level Universe Canvas (558px) | Right iPhone (558px) -->
+            <div class="w-full flex flex-col lg:flex-row items-center justify-center gap-6 xl:gap-7 mb-5">
+                
+                <!-- LEFT IPHONE: Act I Welcome Screenshot Slot (4-Lang x Light/Dark with automatic base fallback) -->
+                <div class="order-2 lg:order-1 flex-shrink-0">
+                    <div class="iphone-18-frame">
+                        <div class="hw-btn btn-action"></div>
+                        <div class="hw-btn btn-vol-up"></div>
+                        <div class="hw-btn btn-vol-down"></div>
+                        <div class="hw-btn btn-power"></div>
+                        <div class="btn-camera-control"></div>
+                        
+                        <div class="iphone-bezel">
+                            <div class="iphone-screen">
+                                <div class="dynamic-island">
+                                    <div class="camera-lens"></div>
+                                </div>
+                                
+                                <!-- ==========================================
+                                🖼️ ANTHONY 左機截圖位 (自動隨 4語 + Light/Dark 切換)
+                                優先讀取: blob_screen_<en|tc|yue|sc>_<light|dark>.png
+                                若未放分語系圖，自動回退讀取: blob_screen_light.png / blob_screen_dark.png
+                                ========================================== -->
+                                <img
+                                    id="blob-img-light"
+                                    src="blob_screen_en_light.png"
+                                    alt="OffloadAI Welcome Screen (Light)"
+                                    class="absolute inset-0 w-full h-full object-cover z-20 block dark:hidden"
+                                    onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='blob_screen_light.png';}else{this.style.display='none';}"
+                                    >
+                                    <img
+                                        id="blob-img-dark"
+                                        src="blob_screen_en_dark.png"
+                                        alt="OffloadAI Welcome Screen (Dark)"
+                                        class="absolute inset-0 w-full h-full object-cover z-20 hidden dark:block"
+                                        onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='blob_screen_dark.png';}else{this.style.display='none';}"
+                                        >
+                                        
+                                        <!-- Absolute Fallback UI -->
+                                        <div class="absolute top-3.5 inset-x-6 flex justify-between text-[10px] font-semibold opacity-80 z-10">
+                                            <span>9:41</span>
+                                            <span>5G • 100%</span>
+                                        </div>
+                                        <div class="absolute inset-0 flex items-center justify-center px-5 text-center z-10">
+                                            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 text-xs leading-relaxed text-white/90 w-full">
+                                                <div class="text-cyan-400 font-mono text-[10px] uppercase tracking-wider mb-1">Act I • Welcome</div>
+                                                <strong id="blob-fallback-label" class="text-xs block mb-1">blob_screen_en_light.png<br>blob_screen_en_dark.png</strong>
+                                                <span class="text-[11px] text-white/60">Or place base blob_screen_light.png / dark.png in root folder.</span>
+                                            </div>
+                                        </div>
+                                        <div class="home-indicator"></div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CENTER CANVAS: 8-Level Dandelion Universe -->
+                <div class="order-1 lg:order-2 w-full flex-1 h-[460px] sm:h-[520px] lg:h-[558px] relative">
+                    <div id="canvas-stage" class="stage-glass w-full h-full rounded-[42px] relative overflow-hidden select-none">
+                        
+                        <!-- Layer 1: Dual-Rail Neon Tension Lines & Stardust Particles -->
+                        <canvas id="fireworks-canvas" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></canvas>
+                        
+                        <!-- Layer 2: True Liquid Glass Folder Cards -->
+                        <div id="camera-world" class="absolute inset-0 w-full h-full z-20 pointer-events-none origin-top-left"></div>
+                        
+                        <!-- Bottom-Left Circular Magic Wand Button (🪄) -->
+                        <button id="firework-btn" type="button" class="absolute bottom-4 left-4 z-30 w-9 h-9 rounded-full bg-black/10 dark:bg-white/10 hover:bg-cyan-500/25 dark:hover:bg-cyan-400/25 backdrop-blur-xl border border-black/10 dark:border-white/20 flex items-center justify-center text-sm shadow-lg transition-all active:scale-90" title="Re-Trigger Firework Layout">
+                            🪄
+                        </button>
+                        
+                        <!-- Bottom-Right Micro Zoom Controls (+ / - / Fit) -->
+                        <div class="absolute bottom-4 right-4 z-30 flex items-center gap-1 bg-black/10 dark:bg-white/10 backdrop-blur-xl p-1 rounded-full border border-black/10 dark:border-white/20 shadow-lg">
+                            <button id="zoom-in-btn" type="button" class="w-7 h-7 rounded-full text-xs font-mono font-bold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Zoom In">+</button>
+                            <button id="zoom-out-btn" type="button" class="w-7 h-7 rounded-full text-xs font-mono font-bold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Zoom Out">&minus;</button>
+                            <button id="zoom-fit-btn" type="button" class="px-2.5 h-7 rounded-full text-[11px] font-mono font-semibold hover:bg-black/10 dark:hover:bg-white/20 transition-colors" title="Fit Entire Universe">Fit</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RIGHT IPHONE: Act V Export Screenshot Slot (4-Lang with automatic fallback to export_screen.png) -->
+                <div class="order-3 flex-shrink-0">
+                    <div class="iphone-18-frame">
+                        <div class="hw-btn btn-action"></div>
+                        <div class="hw-btn btn-vol-up"></div>
+                        <div class="hw-btn btn-vol-down"></div>
+                        <div class="hw-btn btn-power"></div>
+                        <div class="btn-camera-control"></div>
+                        
+                        <div class="iphone-bezel">
+                            <div class="iphone-screen">
+                                <div class="dynamic-island">
+                                    <div class="camera-lens"></div>
+                                </div>
+                                
+                                <!-- ==========================================
+                                🖼️ ANTHONY 右機截圖位 (自動隨 4語 切換，並回退至單一 export_screen.png)
+                                優先讀取: export_screen_<en|tc|yue|sc>.png
+                                若未放分語系圖，自動回退讀取: export_screen.png
+                                ========================================== -->
+                                <img
+                                    id="export-img"
+                                    src="export_screen_en.png"
+                                    alt="OffloadAI Export Screen"
+                                    class="absolute inset-0 w-full h-full object-cover z-20"
+                                    onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='export_screen.png';}else{this.style.display='none';}"
+                                    >
+                                    
+                                    <!-- Absolute Fallback UI -->
+                                    <div class="absolute top-3.5 inset-x-6 flex justify-between text-[10px] font-semibold opacity-80 z-10">
+                                        <span>9:41</span>
+                                        <span>5G • 100%</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex items-center justify-center px-5 text-center z-10">
+                                        <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 text-xs leading-relaxed text-white/90 w-full">
+                                            <div class="text-amber-400 font-mono text-[10px] uppercase tracking-wider mb-1">Act V • External Drive Offload</div>
+                                            <strong id="export-fallback-label" class="text-sm block mb-1">export_screen.png</strong>
+                                            <span class="text-[11px] text-white/60">Place export_screen.png (or export_screen_tc/yue/sc.png) in root folder.</span>
+                                        </div>
+                                    </div>
+                                    <div class="home-indicator"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- 3. Single-Row 4-Month Control Dock -->
+            <div class="w-full max-w-5xl mx-auto flex flex-wrap md:flex-nowrap items-center justify-center gap-2 lg:gap-3 mb-10 z-20">
+                <button id="btn-cluster-feb" data-cluster="feb" class="cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.35)]">
+                    👑 Feb '24 (3,602 photos)
+                </button>
+                <button id="btn-cluster-may" data-cluster="may" class="cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
+                    🗼 May '24 (2,872 photos)
+                </button>
+                <button id="btn-cluster-jul" data-cluster="jul" class="cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
+                    🏰 Jul '24 (1,395 photos)
+                </button>
+                <button id="btn-cluster-sep" data-cluster="sep" class="cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10">
+                    ⛵ Sep '24 (2,492 photos)
+                </button>
+            </div>
+            
+            <!-- 4. H2 Sub-headline -->
+            <div class="max-w-5xl mx-auto text-center z-10 mb-10 px-2">
+                <p id="i18n-h2" class="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-[#a1a1a6] font-light leading-relaxed">
+                Map your chaotic photo library into interactive 4D neural fireworks.<br>Export originals losslessly into date-and-place-organized folders on your external drive.<br>Safely reclaim iPhone storage. <span class="text-gray-900 dark:text-white font-medium">100% On-Device. Zero Cloud.</span>
+                </p>
+            </div>
+            
+            <!-- 5. Waitlist / Loops.so Form Section -->
+            <div class="max-w-2xl mx-auto text-center z-10 w-full px-2">
+                <p id="i18n-cta-hint" class="text-xs sm:text-sm md:text-base text-gray-500 dark:text-gray-400 mb-5 font-medium tracking-wide">
+                Finalizing for iOS. Join the waitlist for early TestFlight access.
+                </p>
+                
+                <!-- ==========================================================
+                🚀 ANTHONY 請注意：下方 action="" 即為你的 Loops.so 表單連結
+                ========================================================== -->
+                <form
+                    id="waitlist-form"
+                    action="https://app.loops.so/api/newsletter-form/cmsobrbw100mu0j23awiezkrv"
+                    method="POST"
+                    class="flex flex-col sm:flex-row gap-3 w-full max-w-md mx-auto relative"
+                    >
+                    <input
+                        id="i18n-email-input"
+                        type="email"
+                        name="email"
+                        placeholder="name@icloud.com"
+                        required
+                        class="flex-1 bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/20 rounded-full px-6 py-4 text-sm sm:text-base text-black dark:text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 dark:focus:border-cyan-400 focus:bg-white dark:focus:bg-white/15 transition-all shadow-inner"
+                        >
+                        <button
+                            type="submit"
+                            id="waitlist-submit"
+                            class="px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-semibold text-sm sm:text-base rounded-full hover:scale-[1.03] active:scale-95 transition-all duration-200 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] dark:shadow-[0_0_25px_rgba(255,255,255,0.25)] whitespace-nowrap"
+                            >
+                            Get Early Access
+                        </button>
+                </form>
+                <p id="waitlist-feedback" class="text-xs font-medium text-emerald-500 mt-3 hidden">
+                🎉 You're on the list! We'll send your TestFlight invite soon.
+                </p>
+            </div>
+            
+        </main>
+        
+        <!-- 6. Footer -->
+        <footer class="py-8 px-6 border-t border-black/5 dark:border-white/10 transition-colors">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
+                <p id="i18n-footer-left">Built by an indie developer. Zero cloud—your photos go straight from iPhone to your external drive.</p>
+                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+                    <a id="i18n-footer-privacy" href="privacy.html" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="https://x.com/offloadai_app" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-black dark:hover:text-white transition-colors">
+                        <span id="i18n-footer-right">Follow the journey on X:</span> <span class="text-cyan-600 dark:text-cyan-400">@offloadai_app</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- ==========================================
+        7. Full 4-Language I18N Dictionary & Interactive Visual Engine
+        ========================================== -->
+        <script>
+            (function() {
+                // --- A. Full Page 4-Language Copy Dictionary (EN / TC / YUE / SC) ---
+                const PAGE_I18N = {
+                    en: {
+                        title: "OffloadAI | Stop sorting files. Start reliving memories.",
+                        h1: "Stop sorting files.<br>Start reliving memories.",
+                        h2: 'Map your chaotic photo library into interactive 4D neural fireworks.<br><span class="sm:whitespace-nowrap">Export originals losslessly into date-and-place-organized folders on your external drive.</span><br><span class="text-gray-900 dark:text-white font-medium">Safely reclaim iPhone storage.<br class="sm:hidden"> 100% On-Device.<br class="sm:hidden"> Zero Cloud.</span>',
+                        btnFeb: "👑 Feb '24 (3,602 photos)",
+                        btnMay: "🗼 May '24 (2,872 photos)",
+                        btnJul: "🏰 Jul '24 (1,395 photos)",
+                        btnSep: "⛵ Sep '24 (2,492 photos)",
+                        ctaHint: "Finalizing for iOS. Join the waitlist for early TestFlight access.",
+                        emailPlaceholder: "name@icloud.com",
+                        ctaBtn: "Get Early Access",
+                        ctaJoining: "Joining...",
+                        ctaJoined: "Joined ✅",
+                        ctaFeedback: "🎉 You're on the list! We'll send your TestFlight invite soon.",
+                        footerLeft: "Built by an indie developer. Zero cloud—your photos go straight from iPhone to your external drive.",
+                        footerPrivacy: "Privacy Policy",
+                        footerRight: "Follow the journey on X:",
+                        fitLabel: "Fit"
+                    },
+                    tc: {
+                        title: "OffloadAI | 別再整理檔案。開始重溫回憶。",
+                        h1: "別再整理檔案。<br>開始重溫回憶。",
+                        h2: '將混亂圖庫化為互動式 4D 神經元煙花星圖。<br>自動依時間與地點建立分類資料夾，無損匯出至外接硬碟。<br><span class="text-gray-900 dark:text-white font-medium">安全清理原圖釋放 iPhone 空間。<br class="sm:hidden">100% 本機運算。<br class="sm:hidden">零雲端上傳。</span>',
+                        btnFeb: "👑 24年2月 (3,602 張相片)",
+                        btnMay: "🗼 24年5月 (2,872 張相片)",
+                        btnJul: "🏰 24年7月 (1,395 張相片)",
+                        btnSep: "⛵ 24年9月 (2,492 張相片)",
+                        ctaHint: "iOS 正式版最後衝刺中。立即加入候補名單，搶先獲取 TestFlight 測試資格。",
+                        emailPlaceholder: "name@icloud.com",
+                        ctaBtn: "搶先體驗",
+                        ctaJoining: "提交中...",
+                        ctaJoined: "已加入 ✅",
+                        ctaFeedback: "🎉 成功加入名單！我們將盡快寄出 TestFlight 邀請。",
+                        footerLeft: "由獨立開發者打造。零雲端上傳——相片直接從 iPhone 匯出至你的外置硬碟。",
+                        footerPrivacy: "私隱政策",
+                        footerRight: "在 X 追蹤開發日誌：",
+                        fitLabel: "置中"
+                    },
+                    yue: {
+                        title: "OffloadAI | 唔使再執相。開始重溫回憶。",
+                        h1: "唔使再執相。<br>開始重溫回憶。",
+                        h2: '將混亂相簿變成互動式 4D 神經元煙花星圖。<br>按時間地點自動分好資料夾，無損過相落外置硬碟。<br>安全清理原圖釋放 iPhone 空間。<span class="text-gray-900 dark:text-white font-medium">100% 本機運算。零雲端上傳。</span>',
+                        btnFeb: "👑 24年2月 (3,602 張相)",
+                        btnMay: "🗼 24年5月 (2,872 張相)",
+                        btnJul: "🏰 24年7月 (1,395 張相)",
+                        btnSep: "⛵ 24年9月 (2,492 張相)",
+                        ctaHint: "iOS 版最後衝刺中。即刻留低 Email，搶先拎 TestFlight 測試資格。",
+                        emailPlaceholder: "name@icloud.com",
+                        ctaBtn: "搶先體驗",
+                        ctaJoining: "登記緊...",
+                        ctaJoined: "搞掂 ✅",
+                        ctaFeedback: "🎉 已經幫你留咗位！TestFlight 一準備好即刻通知你。",
+                        footerLeft: "由獨立開發者打造。零雲端上傳——相片直接由 iPhone 過落你隻 外置硬碟。",
+                        footerPrivacy: "私隱政策",
+                        footerRight: "喺 X 追蹤開發進度：",
+                        fitLabel: "全圖"
+                    },
+                    sc: {
+                        title: "OffloadAI | 别再整理文件。开始重温回忆。",
+                        h1: "别再整理文件。<br>开始重温回忆。",
+                        h2: '将混乱图库化为交互式 4D 神经元烟花星图。<br>自动按时间与地点生成分类文件夹，无损落盘至外置硬盘。<br><span class="text-gray-900 dark:text-white font-medium">安全释放 iPhone 存储空间。<br class="sm:hidden">100% 本机运算。<br class="sm:hidden">零云端上传。</span>',
+                        btnFeb: "👑 24年2月 (3,602 张照片)",
+                        btnMay: "🗼 24年5月 (2,872 张照片)",
+                        btnJul: "🏰 24年7月 (1,395 张照片)",
+                        btnSep: "⛵ 24年9月 (2,492 张照片)",
+                        ctaHint: "iOS 正式版最后冲刺中。立即加入候补名单，抢先获取 TestFlight 测试资格。",
+                        emailPlaceholder: "name@icloud.com",
+                        ctaBtn: "抢先体验",
+                        ctaJoining: "提交中...",
+                        ctaJoined: "已加入 ✅",
+                        ctaFeedback: "🎉 成功加入名单！我们将尽快寄出 TestFlight 邀请。",
+                        footerLeft: "由独立开发者打造。零云端上传——照片直接从 iPhone 导出至你的外置硬盘。",
+                        footerPrivacy: "隐私政策",
+                        footerRight: "在 X 追踪开发日志：",
+                        fitLabel: "全图"
+                    }
+                };
+                
+                let currentKey = 'feb';
+                let currentLang = 'en';
+                let isFormSubmitted = false;
+                
+                const themeToggleBtn = document.getElementById('theme-toggle');
+                const isDark = () => document.documentElement.classList.contains('dark');
+                
+                function updateLocalizedScreenshots() {
+                    const blobLight = document.getElementById('blob-img-light');
+                    const blobDark = document.getElementById('blob-img-dark');
+                    const exportImg = document.getElementById('export-img');
+                    const blobLabel = document.getElementById('blob-fallback-label');
+                    const exportLabel = document.getElementById('export-fallback-label');
+                    
+                    if (blobLight) {
+                        delete blobLight.dataset.fb;
+                        blobLight.style.display = '';
+                        blobLight.src = `blob_screen_${currentLang}_light.png`;
+                    }
+                    if (blobDark) {
+                        delete blobDark.dataset.fb;
+                        blobDark.style.display = '';
+                        blobDark.src = `blob_screen_${currentLang}_dark.png`;
+                    }
+                    if (exportImg) {
+                        delete exportImg.dataset.fb;
+                        exportImg.style.display = '';
+                        exportImg.src = `export_screen_${currentLang}.png`;
+                    }
+                    if (blobLabel) {
+                        blobLabel.innerHTML = `blob_screen_${currentLang}_light.png<br>blob_screen_${currentLang}_dark.png`;
+                    }
+                    if (exportLabel) {
+                        exportLabel.textContent = `export_screen_${currentLang}.png`;
+                    }
+                }
+                
+                function applyPageLocalization() {
+                    const copy = PAGE_I18N[currentLang] || PAGE_I18N.en;
+                    document.title = copy.title;
+                    document.getElementById('i18n-h1').innerHTML = copy.h1;
+                    document.getElementById('i18n-h2').innerHTML = copy.h2;
+                    document.getElementById('btn-cluster-feb').textContent = copy.btnFeb;
+                    document.getElementById('btn-cluster-may').textContent = copy.btnMay;
+                    document.getElementById('btn-cluster-jul').textContent = copy.btnJul;
+                    document.getElementById('btn-cluster-sep').textContent = copy.btnSep;
+                    document.getElementById('i18n-cta-hint').textContent = copy.ctaHint;
+                    document.getElementById('i18n-email-input').placeholder = copy.emailPlaceholder;
+                    document.getElementById('waitlist-submit').textContent = isFormSubmitted ? copy.ctaJoined : copy.ctaBtn;
+                    document.getElementById('waitlist-feedback').textContent = copy.ctaFeedback;
+                    document.getElementById('i18n-footer-left').textContent = copy.footerLeft;
+                    document.getElementById('i18n-footer-privacy').textContent = copy.footerPrivacy;
+                    document.getElementById('i18n-footer-right').textContent = copy.footerRight;
+                    document.getElementById('zoom-fit-btn').textContent = copy.fitLabel;
+                    
+                    updateLocalizedScreenshots();
+                }
+                
+                themeToggleBtn.addEventListener('click', () => {
+                    document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('color-theme', isDark() ? 'dark' : 'light');
+                    renderDOMCards();
+                });
+                
+                // --- B. Palette & Realistic Micro-Photo Thumbnail SVG Generator ---
+                const PALETTE = {
+                    pink:   { fillD: '#D81B60', strokeD: '#FF80AB', fillL: '#D81B60', strokeL: '#880E4F', c1: '#3b0a1e', c2: '#9c1449', bokeh: '#ff80ab' },
+                    green:  { fillD: '#00C853', strokeD: '#69F0AE', fillL: '#2E7D32', strokeL: '#1B5E20', c1: '#072612', c2: '#1b6e35', bokeh: '#69f0ae' },
+                    blue:   { fillD: '#2962FF', strokeD: '#82B1FF', fillL: '#1565C0', strokeL: '#0D47A1', c1: '#071638', c2: '#15469e', bokeh: '#82b1ff' },
+                    gold:   { fillD: '#FFAB00', strokeD: '#FFE57F', fillL: '#D97706', strokeL: '#92400E', c1: '#2e1604', c2: '#944d0b', bokeh: '#ffe57f' },
+                    purple: { fillD: '#AA00FF', strokeD: '#EA80FC', fillL: '#6A1B9A', strokeL: '#4A148C', c1: '#1e0536', c2: '#63129c', bokeh: '#ea80fc' },
+                    orange: { fillD: '#FF6D00', strokeD: '#FFD180', fillL: '#E65100', strokeL: '#BF360C', c1: '#331004', c2: '#9e360b', bokeh: '#ffd180' },
+                    cyan:   { fillD: '#00B8D4', strokeD: '#84FFFF', fillL: '#0284C7', strokeL: '#0369A1', c1: '#04222e', c2: '#095f7d', bokeh: '#84ffff' }
+                };
+                
+                function buildTreeNodes(rawList) {
+                    const map = new Map();
+                    const parentSet = new Set();
+                    rawList.forEach(item => { if (item.p) parentSet.add(item.p); });
+                    
+                    rawList.forEach(item => {
+                        let x = 0, y = 0;
+                        if (item.p && map.has(item.p)) {
+                            const parent = map.get(item.p);
+                            const rad = (item.a * Math.PI) / 180;
+                            x = parent.x + Math.cos(rad) * item.d;
+                            y = parent.y + Math.sin(rad) * item.d;
+                        }
+                        const node = { ...item, x, y, hasChildren: parentSet.has(item.id) };
+                        map.set(item.id, node);
+                    });
+                    return Array.from(map.values());
+                }
+                
+                const TREES = {
+                    feb: buildTreeNodes([
+                                         { id: 'n0', lv: 1, a: 0, d: 0, pal: 'gold', cnt: '3,602', t: { en: 'Feb 2024 👑', tc: '2024年2月 👑', yue: '2024年2月 👑', sc: '2024年2月 👑' } },
+                                         
+                                         // Branch 1: Taiwan (2,436)
+                                         { id: 'tw', p: 'n0', lv: 2, a: -90, d: 165, pal: 'pink', cnt: '2,436', t: { en: 'Taiwan', tc: '臺灣', yue: '臺灣', sc: '台湾' } },
+                                         { id: 'tpe', p: 'tw', lv: 3, a: -135, d: 175, pal: 'pink', cnt: '1,293', t: { en: 'Taipei City', tc: '臺北市', yue: '臺北市', sc: '台北市' } },
+                                         { id: 'ila', p: 'tw', lv: 3, a: -45, d: 175, pal: 'green', cnt: '1,098', t: { en: 'Yilan County', tc: '宜蘭縣', yue: '宜蘭縣', sc: '宜兰县' } },
+                                         
+                                         // Taipei L4 -> L5 -> L6 -> L7
+                                         { id: 'f23', p: 'tpe', lv: 4, a: -162, d: 170, pal: 'pink', cnt: '709', t: { en: 'Feb 23', tc: '2月23日', yue: '2月23日', sc: '2月23日' } },
+                                         { id: 'f22', p: 'tpe', lv: 4, a: -108, d: 165, pal: 'pink', cnt: '354', t: { en: 'Feb 22', tc: '2月22日', yue: '2月22日', sc: '2月22日' } },
+                                         { id: 'hut', p: 'f23', lv: 5, a: -178, d: 170, pal: 'pink', cnt: '257', t: { en: 'Hutian (Noon)', tc: '湖田里 (中午)', yue: '湖田里 (晏晝)', sc: '湖田里 (中午)' } },
+                                         { id: 'hsh', p: 'f23', lv: 5, a: -138, d: 170, pal: 'pink', cnt: '145', t: { en: 'Hushan Village', tc: '湖山里', yue: '湖山里 (下晝)', sc: '湖山里' } },
+                                         { id: 'yul', p: 'hut', lv: 6, a: -195, d: 175, pal: 'pink', cnt: '71', t: { en: 'Yulong Pavilion (14:43 P2)', tc: '玉瀧谷涼亭 (14:43 P2)', yue: '玉瀧谷涼亭 (14:43 P2)', sc: '玉泷谷凉亭 (14:43 P2)' } },
+                                         { id: 'din', p: 'hut', lv: 6, a: -160, d: 175, pal: 'pink', cnt: '65', t: { en: 'Dinosaur Rock (11:38 P2)', tc: '恐龍石 (11:38 P2)', yue: '恐龍石 (11:38 P2)', sc: '恐龙石 (11:38 P2)' } },
+                                         { id: 'ljx', p: 'hsh', lv: 6, a: -130, d: 175, pal: 'pink', cnt: '111', t: { en: 'Li Jianxing (16:16 P1)', tc: '李建興紀念碑 (16:16 P1)', yue: '李建興紀念碑 (16:16 P1)', sc: '李建兴纪念碑 (16:16 P1)' } },
+                                         { id: 'ljx_p', p: 'ljx', lv: 7, a: -130, d: 145, pal: 'pink', cnt: '62', t: { en: 'Portraits', tc: '人像', yue: '人像', sc: '人像' } },
+                                         { id: 'bsh', p: 'f22', lv: 5, a: -98, d: 165, pal: 'pink', cnt: '145', t: { en: 'Bishan Temple (10:13 P1)', tc: '碧山巖 (10:13 P1)', yue: '內湖碧山巖 (10:13 P1)', sc: '碧山岩 (10:13 P1)' } },
+                                         
+                                         // Yilan L4 -> L5 -> L6 -> L7
+                                         { id: 'f21', p: 'ila', lv: 4, a: -64, d: 170, pal: 'green', cnt: '595', t: { en: 'Feb 21', tc: '2月21日', yue: '2月21日', sc: '2月21日' } },
+                                         { id: 'f20', p: 'ila', lv: 4, a: -20, d: 165, pal: 'green', cnt: '306', t: { en: 'Feb 20', tc: '2月20日', yue: '2月20日', sc: '2月20日' } },
+                                         { id: 'tpg', p: 'f21', lv: 5, a: -68, d: 170, pal: 'green', cnt: '438', t: { en: 'Taiping (Noon)', tc: '太平村 (中午)', yue: '太平山 (正午)', sc: '太平村 (中午)' } },
+                                         { id: 'jq1', p: 'tpg', lv: 6, a: -86, d: 175, pal: 'green', cnt: '191', t: { en: 'Jianqing Trail (11:22 P1)', tc: '見晴懷古步道 (11:22 P1)', yue: '見晴懷古步道 (11:22 P1)', sc: '见晴怀古步道 (11:22 P1)' } },
+                                         { id: 'mx1', p: 'tpg', lv: 6, a: -50, d: 175, pal: 'green', cnt: '75', t: { en: 'Maoxing Trail (13:38 P1)', tc: '茂興懷舊步道 (13:38 P1)', yue: '茂興懷舊步道 (13:38 P1)', sc: '茂兴怀旧步道 (13:38 P1)' } },
+                                         { id: 'jq_v', p: 'jq1', lv: 7, a: -86, d: 145, pal: 'green', cnt: '9', t: { en: 'Videos', tc: '影片', yue: '影片', sc: '视频' } },
+                                         { id: 'erc', p: 'f20', lv: 5, a: -15, d: 165, pal: 'green', cnt: '132', t: { en: 'Quezishan Trail', tc: '鵲子山露營區', yue: '礁溪跑馬古道/鵲子山', sc: '鹊子山露营区' } },
+                                         
+                                         // Branch 2: United States (837)
+                                         { id: 'usa', p: 'n0', lv: 2, a: 28, d: 175, pal: 'blue', cnt: '837', t: { en: 'United States', tc: '美國', yue: '美國', sc: '美国' } },
+                                         { id: 'fla', p: 'usa', lv: 3, a: 8, d: 170, pal: 'blue', cnt: '489', t: { en: 'Florida • Miami', tc: '佛羅里達州', yue: '佛羅里達 • 邁阿密', sc: '佛罗里达州' } },
+                                         { id: 'cal', p: 'usa', lv: 3, a: 52, d: 170, pal: 'cyan', cnt: '264', t: { en: 'California • LA', tc: '加利福尼亞州', yue: '加州 • 洛杉磯', sc: '加利福尼亚州' } },
+                                         { id: 'f15', p: 'fla', lv: 4, a: 4, d: 165, pal: 'blue', cnt: '295', t: { en: 'Feb 15 • Miami', tc: '2月15日 • 邁阿密', yue: '2月15日 • 邁阿密海灘', sc: '2月15日 • 迈阿密' } },
+                                         { id: 'bal', p: 'f15', lv: 6, a: 2, d: 165, pal: 'blue', cnt: '148', t: { en: 'Bal Harbor Beach', tc: '巴爾港海灘', yue: 'Bal Harbor 沙灘', sc: '巴尔港海滩' } },
+                                         { id: 'f12', p: 'cal', lv: 4, a: 55, d: 165, pal: 'cyan', cnt: '217', t: { en: 'Feb 12 • Marina Del Rey', tc: '2月12日 • 漁人村', yue: '2月12日 • 洛杉磯碼頭', sc: '2月12日 • 渔人村' } },
+                                         
+                                         // Branch 3: Hong Kong (Privacy-Safe: "Home" only) & Lianhe Subdistrict -> Hotel Nikko
+                                         { id: 'hkg', p: 'n0', lv: 2, a: 135, d: 170, pal: 'purple', cnt: '100', t: { en: 'Hong Kong', tc: '香港', yue: '香港', sc: '香港' } },
+                                         { id: 'hom', p: 'hkg', lv: 5, a: 135, d: 160, pal: 'purple', cnt: '65', t: { en: 'Home', tc: '屋企', yue: '屋企', sc: '家' } },
+                                         
+                                         { id: 'lnh', p: 'n0', lv: 5, a: 195, d: 185, pal: 'pink', cnt: '52', t: { en: 'Lianhe Subdistrict', tc: '聯和街道', yue: '聯和街道', sc: '联和街道' } },
+                                         { id: 'nk1', p: 'lnh', lv: 6, a: 158, d: 190, pal: 'pink', cnt: '6',  t: { en: 'Hotel Nikko (17:19 P1)', tc: '廣州日航酒店 (17:19 P1)', yue: '廣州日航酒店 (17:19 P1)', sc: '广州日航酒店 (17:19 P1)' } },
+                                         { id: 'nk2', p: 'lnh', lv: 6, a: 195, d: 190, pal: 'pink', cnt: '40', t: { en: 'Hotel Nikko (17:55 P2)', tc: '廣州日航酒店 (17:55 P2)', yue: '廣州日航酒店 (17:55 P2)', sc: '广州日航酒店 (17:55 P2)' } },
+                                         { id: 'nk3', p: 'lnh', lv: 6, a: 232, d: 190, pal: 'pink', cnt: '6',  t: { en: 'Hotel Nikko (20:24 P3)', tc: '廣州日航酒店 (20:24 P3)', yue: '廣州日航酒店 (20:24 P3)', sc: '广州日航酒店 (20:24 P3)' } },
+                                         { id: 'nkv', p: 'nk2', lv: 7, a: 195, d: 145, pal: 'pink', cnt: '1',  t: { en: 'Videos', tc: '影片', yue: '影片', sc: '视频' } }
+                                         ]),
+                                         
+                                         may: buildTreeNodes([
+                                                              { id: 'n0', lv: 1, a: 0, d: 0, pal: 'cyan', cnt: '2,872', t: { en: 'May 2024', tc: '2024年5月', yue: '2024年5月', sc: '2024年5月' } },
+                                                              { id: 'jpn', p: 'n0', lv: 2, a: -90, d: 165, pal: 'pink', cnt: '2,632', t: { en: 'Japan', tc: '日本', yue: '日本', sc: '日本' } },
+                                                              { id: 'tky', p: 'jpn', lv: 3, a: -120, d: 170, pal: 'pink', cnt: '2,358', t: { en: 'Tokyo Metropolis', tc: '東京都', yue: '東京都', sc: '东京都' } },
+                                                              { id: 'chb', p: 'jpn', lv: 3, a: -42, d: 175, pal: 'purple', cnt: '261', t: { en: 'Chiba Prefecture', tc: '日本千葉縣', yue: '千葉縣 • 成田', sc: '日本千叶县' } },
+                                                              
+                                                              { id: 'm05', p: 'tky', lv: 4, a: -165, d: 175, pal: 'pink', cnt: '718', t: { en: 'May 5', tc: '5月5日', yue: '5月5日', sc: '5月5日' } },
+                                                              { id: 'm02', p: 'tky', lv: 4, a: -120, d: 175, pal: 'orange', cnt: '512', t: { en: 'May 2', tc: '5月2日', yue: '5月2日', sc: '5月2日' } },
+                                                              { id: 'm03', p: 'tky', lv: 4, a: -78, d: 175, pal: 'green', cnt: '276', t: { en: 'May 3', tc: '5月3日', yue: '5月3日', sc: '5月3日' } },
+                                                              { id: 'm04', p: 'tky', lv: 4, a: 162, d: 180, pal: 'blue', cnt: '258', t: { en: 'May 4', tc: '5月4日', yue: '5月4日', sc: '5月4日' } },
+                                                              { id: 'm07', p: 'tky', lv: 4, a: 122, d: 180, pal: 'gold', cnt: '211', t: { en: 'May 7', tc: '5月7日', yue: '5月7日', sc: '5月7日' } },
+                                                              
+                                                              { id: 'kot', p: 'm05', lv: 5, a: -175, d: 175, pal: 'pink', cnt: '547', t: { en: 'Koto (Morning)', tc: '江東區 (上午)', yue: '江東區 (朝早)', sc: '江东区 (上午)' } },
+                                                              { id: 'tl1', p: 'kot', lv: 6, a: -215, d: 195, pal: 'pink', cnt: '12',  t: { en: 'teamLab (08:57 P1)', tc: 'teamLab (08:57 P1)', yue: 'teamLab (08:57 P1)', sc: 'teamLab (08:57 P1)' } },
+                                                              { id: 'tl2', p: 'kot', lv: 6, a: -177, d: 195, pal: 'pink', cnt: '196', t: { en: 'teamLab (09:27 P2)', tc: 'teamLab (09:27 P2)', yue: 'teamLab (09:27 P2)', sc: 'teamLab (09:27 P2)' } },
+                                                              { id: 'tl3', p: 'kot', lv: 6, a: -139, d: 195, pal: 'pink', cnt: '339', t: { en: 'teamLab (10:06 P3)', tc: 'teamLab (10:06 P3)', yue: 'teamLab (10:06 P3)', sc: 'teamLab (10:06 P3)' } },
+                                                              { id: 'tl_p', p: 'tl3', lv: 7, a: -152, d: 155, pal: 'pink', cnt: '33', t: { en: 'Portraits', tc: '人像', yue: '人像', sc: '人像' } },
+                                                              { id: 'tl_v', p: 'tl3', lv: 7, a: -124, d: 155, pal: 'pink', cnt: '6',  t: { en: 'Videos', tc: '影片', yue: '影片', sc: '视频' } },
+                                                              
+                                                              { id: 'ner', p: 'm02', lv: 5, a: -116, d: 170, pal: 'orange', cnt: '444', t: { en: 'Nerima (12:01 P7)', tc: '練馬區 (12:01 P7)', yue: '練馬區 (12:01 P7)', sc: '练马区 (12:01 P7)' } },
+                                                              { id: 'tai', p: 'm03', lv: 5, a: -76, d: 170, pal: 'green', cnt: '152', t: { en: 'Senso-ji (12:09 P3)', tc: '淺草仁王尊像 (12:09 P3)', yue: '淺草仁王尊像 (12:09 P3)', sc: '浅草仁王尊像 (12:09 P3)' } },
+                                                              { id: 'min', p: 'm04', lv: 5, a: 162, d: 170, pal: 'blue', cnt: '138', t: { en: 'Shiba Park (15:25 P1)', tc: '芝公園時計台 (15:25 P1)', yue: '芝公園時計台 (15:25 P1)', sc: '芝公园时计台 (15:25 P1)' } },
+                                                              { id: 'oda', p: 'm07', lv: 6, a: 122, d: 170, pal: 'gold', cnt: '141', t: { en: 'Aqua City (11:46 P2)', tc: '台場 Aqua City (11:46 P2)', yue: '台場 Aqua City (11:46 P2)', sc: '台场 Aqua City (11:46 P2)' } },
+                                                              
+                                                              { id: 'nrt', p: 'chb', lv: 5, a: -35, d: 170, pal: 'purple', cnt: '208', t: { en: 'Narita Park (12:35 P1)', tc: '成田公園 (12:35 P1)', yue: '成田公園 (12:35 P1)', sc: '成田公园 (12:35 P1)' } },
+                                                              { id: 'hkg', p: 'n0', lv: 2, a: 45, d: 175, pal: 'green', cnt: '134', t: { en: 'Hong Kong • Home', tc: '香港 • 屋企', yue: '香港 • 屋企', sc: '香港 • 家' } }
+                                                              ]),
+                                                              
+                                                              // Real Metadata-Verified Jul 2024 Tree (Walt Disney World 742 + HK Coliseum 248)
+                                                              jul: buildTreeNodes([
+                                                                                   { id: 'n0', lv: 1, a: 0, d: 0, pal: 'purple', cnt: '1,395', t: { en: 'Jul 2024', tc: '2024年7月', yue: '2024年7月', sc: '2024年7月' } },
+                                                                                   
+                                                                                   // Branch 1: USA -> Florida -> Jul 20 Walt Disney World (742)
+                                                                                   { id: 'usa', p: 'n0', lv: 2, a: -135, d: 165, pal: 'blue', cnt: '994', t: { en: 'United States', tc: '美國', yue: '美國', sc: '美国' } },
+                                                                                   { id: 'fl', p: 'usa', lv: 3, a: -135, d: 165, pal: 'blue', cnt: '966', t: { en: 'Florida • Orlando', tc: '佛羅里達州 • 奧蘭多', yue: '佛羅里達州 • 奧蘭多', sc: '佛罗里达州 • 奥兰多' } },
+                                                                                   { id: 'j20', p: 'fl', lv: 4, a: -135, d: 170, pal: 'cyan', cnt: '742', t: { en: 'Jul 20 • Walt Disney World', tc: '7月20日 • 華德迪士尼世界', yue: '7月20日 • 華德迪士尼世界', sc: '7月20日 • 华特迪士尼世界' } },
+                                                                                   
+                                                                                   // L5 Parks & Time Slots (4 Real Core Partitions - Widened Sector Angles)
+                                                                                   { id: 'hsm', p: 'j20', lv: 5, a: -212, d: 205, pal: 'cyan', cnt: '169', t: { en: 'Hollywood Studios (Morning)', tc: '迪士尼好萊塢影城 (上午)', yue: '迪士尼好萊塢影城 (朝早)', sc: '迪士尼好莱坞影城 (上午)' } },
+                                                                                   { id: 'hsn', p: 'j20', lv: 5, a: -162, d: 225, pal: 'blue', cnt: '141', t: { en: 'Hollywood Studios (Noon)', tc: '迪士尼好萊塢影城 (正午)', yue: '迪士尼好萊塢影城 (正午)', sc: '迪士尼好莱坞影城 (正午)' } },
+                                                                                   { id: 'mka', p: 'j20', lv: 5, a: -112, d: 215, pal: 'gold', cnt: '168', t: { en: 'Magic Kingdom (Afternoon)', tc: '神奇王國 (下午)', yue: 'Magic Kingdom (晏晝)', sc: '神奇王国 (下午)' } },
+                                                                                   { id: 'mkd', p: 'j20', lv: 5, a: -62,  d: 205, pal: 'purple', cnt: '257', t: { en: 'Magic Kingdom (Dusk & Night)', tc: '神奇王國 (黃昏及夜晚)', yue: 'Magic Kingdom (黃昏及夜晚)', sc: '神奇王国 (黄昏及夜晚)' } },
+                                                                                   
+                                                                                   // Hollywood Studios (Morning) -> L6 -> L7
+                                                                                   { id: 'swr', p: 'hsm', lv: 6, a: -242, d: 195, pal: 'cyan', cnt: '60', t: { en: 'Star Wars: Rise of Resistance', tc: '星戰：抵抗勢力崛起', yue: 'Star Wars: Rise of Resistance', sc: '星战：抵抗势力崛起' } },
+                                                                                   { id: 'oga', p: 'hsm', lv: 6, a: -212, d: 255, pal: 'cyan', cnt: '36', t: { en: 'Oga\'s Cantina', tc: 'Oga\'s Cantina 星戰酒吧', yue: 'Oga\'s Cantina 星戰酒吧', sc: 'Oga\'s Cantina 星战酒吧' } },
+                                                                                   { id: 'str', p: 'hsm', lv: 6, a: -182, d: 195, pal: 'cyan', cnt: '46', t: { en: 'Grand Ave & Star Tours', tc: '星際旅行 & 大道美食', yue: 'Star Tours & 大道美食', sc: '星际旅行 & 大道美食' } },
+                                                                                   { id: 'swr_v', p: 'swr', lv: 7, a: -242, d: 145, pal: 'cyan', cnt: '3', t: { en: 'Videos', tc: '影片', yue: '影片', sc: '视频' } },
+                                                                                   { id: 'oga_v', p: 'oga', lv: 7, a: -212, d: 145, pal: 'cyan', cnt: '2', t: { en: 'Videos', tc: '影片', yue: '影片', sc: '视频' } },
+                                                                                   
+                                                                                   // Hollywood Studios (Noon) -> L6 (Spread out cleanly)
+                                                                                   { id: 'wdp', p: 'hsn', lv: 6, a: -188, d: 205, pal: 'blue', cnt: '61', t: { en: 'Walt Disney Presents', tc: '華特迪士尼展覽館', yue: 'Walt Disney Presents', sc: '华特迪士尼展览馆' } },
+                                                                                   { id: 'mda', p: 'hsn', lv: 6, a: -158, d: 260, pal: 'blue', cnt: '51', t: { en: 'Magic of Disney Animation', tc: '迪士尼動畫魔力館', yue: 'Disney Animation 動畫館', sc: '迪士尼动画魔力馆' } },
+                                                                                   { id: 'tsm', p: 'hsn', lv: 6, a: -128, d: 200, pal: 'blue', cnt: '11', t: { en: 'Toy Story Mania!', tc: '玩具總動員瘋狂遊戲屋', yue: 'Toy Story Mania!', sc: '玩具总动员疯狂游戏屋' } },
+                                                                                   
+                                                                                   // Magic Kingdom (Afternoon) -> L6 (Separated cleanly)
+                                                                                   { id: 'msc', p: 'mka', lv: 6, a: -130, d: 215, pal: 'gold', cnt: '114', t: { en: 'Main Street Confectionery', tc: '美國小鎮大街糖果店', yue: '小鎮大街糖果店', sc: '美国小镇大街糖果店' } },
+                                                                                   { id: 'csh', p: 'mka', lv: 6, a: -92,  d: 205, pal: 'gold', cnt: '18',  t: { en: 'Cheshire Café & Castle', tc: '柴郡貓咖啡館 & 城堡', yue: 'Cheshire Café & 城堡', sc: '柴郡猫咖啡馆 & 城堡' } },
+                                                                                   
+                                                                                   // Magic Kingdom (Dusk & Night) -> L6 -> L7 (All unified Purple + Widened)
+                                                                                   { id: 'par', p: 'mkd', lv: 6, a: -90, d: 220, pal: 'purple', cnt: '219', t: { en: 'Partners Statue (21:15 Fireworks)', tc: 'Partners 銅像 (21:15 煙花)', yue: 'Partners 銅像 (21:15 煙花)', sc: 'Partners 铜像 (21:15 烟花)' } },
+                                                                                   { id: 'trn', p: 'mkd', lv: 6, a: -60, d: 265, pal: 'purple', cnt: '4',   t: { en: 'TRON Lightcycle / Run', tc: '創極速光輪', yue: 'TRON 光輪過山車', sc: '创极速光轮' } },
+                                                                                   { id: 'fan', p: 'mkd', lv: 6, a: -30, d: 210, pal: 'purple', cnt: '14',  t: { en: 'Fantasyland & Barnstormer', tc: '夢幻世界 & 穀倉風暴', yue: 'Fantasyland 夢幻世界', sc: '梦幻世界 & 谷仓风暴' } },
+                                                                                   { id: 'par_v', p: 'par', lv: 7, a: -90, d: 145, pal: 'purple', cnt: '1', t: { en: 'Videos', tc: '影片', yue: '影片', sc: '视频' } },
+                                                                                   
+                                                                                   // Branch 2: Hong Kong -> Jul 13 -> Hung Hom (紅磡) -> 8 Coliseum Branches
+                                                                                   { id: 'hkg', p: 'n0', lv: 2, a: 22, d: 165, pal: 'pink', cnt: '338', t: { en: 'Hong Kong', tc: '香港', yue: '香港', sc: '香港' } },
+                                                                                   { id: 'j13', p: 'hkg', lv: 4, a: 22, d: 165, pal: 'pink', cnt: '254', t: { en: 'Jul 13', tc: '7月13日', yue: '7月13日', sc: '7月13日' } },
+                                                                                   { id: 'hhm', p: 'j13', lv: 5, a: 22, d: 165, pal: 'pink', cnt: '248', t: { en: 'Hung Hom', tc: '紅磡', yue: '紅磡', sc: '红磡' } },
+                                                                                   
+                                                                                   { id: 'c1', p: 'hhm', lv: 6, a: -58, d: 215, pal: 'pink', cnt: '2',   t: { en: 'HK Coliseum (19:34 P1)', tc: '香港體育館 (19:34 P1)', yue: '紅館 (19:34 P1)', sc: '香港体育馆 (19:34 P1)' } },
+                                                                                   { id: 'c2', p: 'hhm', lv: 6, a: -35, d: 295, pal: 'pink', cnt: '35',  t: { en: 'HK Coliseum (19:41 P2)', tc: '香港體育館 (19:41 P2)', yue: '紅館 (19:41 P2)', sc: '香港体育馆 (19:41 P2)' } },
+                                                                                   { id: 'c3', p: 'hhm', lv: 6, a: -12, d: 215, pal: 'pink', cnt: '42',  t: { en: 'HK Coliseum (20:30 P3)', tc: '香港體育館 (20:30 P3)', yue: '紅館 (20:30 P3)', sc: '香港体育馆 (20:30 P3)' } },
+                                                                                   { id: 'c4', p: 'hhm', lv: 6, a: 11,  d: 295, pal: 'pink', cnt: '112', t: { en: 'HK Coliseum (20:51 P4)', tc: '香港體育館 (20:51 P4)', yue: '紅館 (20:51 P4)', sc: '香港体育馆 (20:51 P4)' } },
+                                                                                   { id: 'c5', p: 'hhm', lv: 6, a: 34,  d: 215, pal: 'pink', cnt: '16',  t: { en: 'HK Coliseum (21:38 P5)', tc: '香港體育館 (21:38 P5)', yue: '紅館 (21:38 P5)', sc: '香港体育馆 (21:38 P5)' } },
+                                                                                   { id: 'c6', p: 'hhm', lv: 6, a: 57,  d: 295, pal: 'pink', cnt: '9',   t: { en: 'HK Coliseum (21:56 P6)', tc: '香港體育館 (21:56 P6)', yue: '紅館 (21:56 P6)', sc: '香港体育馆 (21:56 P6)' } },
+                                                                                   { id: 'c7', p: 'hhm', lv: 6, a: 80,  d: 215, pal: 'pink', cnt: '23',  t: { en: 'HK Coliseum (22:03 P7)', tc: '香港體育館 (22:03 P7)', yue: '紅館 (22:03 P7)', sc: '香港体育馆 (22:03 P7)' } },
+                                                                                   { id: 'c8', p: 'hhm', lv: 6, a: 103, d: 295, pal: 'pink', cnt: '9',   t: { en: 'HK Coliseum (22:48 P8)', tc: '香港體育館 (22:48 P8)', yue: '紅館 (22:48 P8)', sc: '香港体育馆 (22:48 P8)' } },
+                                                                                   
+                                                                                   { id: 'c2_p', p: 'c2', lv: 7, a: -35, d: 135, pal: 'pink', cnt: '26', t: { en: 'Portraits', tc: '人像', yue: '人像', sc: '人像' } },
+                                                                                   { id: 'c4_v', p: 'c4', lv: 7, a: 11,  d: 135, pal: 'pink', cnt: '1',  t: { en: 'Videos', tc: '影片', yue: '影片', sc: '视频' } }
+                                                                                   ]),
+                                                                                   
+                                                                                   // Real Metadata-Verified Sep 2024 Tree (France Côte d'Azur 2,066 + Monaco 302 + HK Sir Cecil's Ride 40)
+                                                                                   sep: buildTreeNodes([
+                                                                                                        { id: 'n0', lv: 1, a: 0, d: 0, pal: 'blue', cnt: '2,492', t: { en: 'Sep 2024', tc: '2024年9月', yue: '2024年9月', sc: '2024年9月' } },
+                                                                                                        
+                                                                                                        // Branch 1: France -> Provence-Côte d'Azur (2,066)
+                                                                                                        { id: 'fra', p: 'n0', lv: 2, a: -115, d: 165, pal: 'green', cnt: '2,066', t: { en: 'France', tc: '法國', yue: '法國', sc: '法国' } },
+                                                                                                        { id: 'pac', p: 'fra', lv: 3, a: -115, d: 165, pal: 'green', cnt: '2,066', t: { en: 'Provence-Côte d\'Azur', tc: '普羅旺斯-藍色海岸', yue: '普羅旺斯-藍色海岸', sc: '普罗旺斯-蓝色海岸' } },
+                                                                                                        
+                                                                                                        // L4 Golden Days
+                                                                                                        { id: 's17', p: 'pac', lv: 4, a: -175, d: 185, pal: 'green', cnt: '459', t: { en: 'Sep 17 • Marseille', tc: '9月17日 • 馬賽', yue: '9月17日 • 馬賽', sc: '9月17日 • 马赛' } },
+                                                                                                        { id: 's19', p: 'pac', lv: 4, a: -135, d: 185, pal: 'cyan',  cnt: '339', t: { en: 'Sep 19 • Nice', tc: '9月19日 • 尼斯', yue: '9月19日 • 尼斯', sc: '9月19日 • 尼斯' } },
+                                                                                                        { id: 's16', p: 'pac', lv: 4, a: -95,  d: 185, pal: 'blue',  cnt: '308', t: { en: 'Sep 16 • Cannes to Marseille', tc: '9月16日 • 坎城至馬賽', yue: '9月16日 • 康城去馬賽', sc: '9月16日 • 戛纳至马赛' } },
+                                                                                                        { id: 's14', p: 'pac', lv: 4, a: -55,  d: 185, pal: 'gold',  cnt: '262', t: { en: 'Sep 8 & 14 • Cannes', tc: '9月8及14日 • 坎城', yue: '9月8及14日 • 康城', sc: '9月8及14日 • 戛纳' } },
+                                                                                                        
+                                                                                                        // Sep 17 Marseille -> L5 -> L6 -> L7
+                                                                                                        { id: 'fsn', p: 's17', lv: 5, a: -195, d: 180, pal: 'green', cnt: '125', t: { en: 'Fort Saint-Nicolas (Afternoon)', tc: '聖尼古拉堡 (下午)', yue: '聖尼古拉堡 (晏晝)', sc: '圣尼古拉堡 (下午)' } },
+                                                                                                        { id: 'sqd', p: 's17', lv: 5, a: -162, d: 180, pal: 'green', cnt: '151', t: { en: 'Square Danjaume (Noon)', tc: '丹若姆廣場 (正午)', yue: '丹若姆廣場 (正午)', sc: '丹若姆广场 (正午)' } },
+                                                                                                        { id: 'ndg', p: 'fsn', lv: 6, a: -200, d: 180, pal: 'green', cnt: '48',  t: { en: 'Notre Dame de la Garde', tc: '守護聖母聖殿', yue: '守護聖母聖殿', sc: '守护圣母圣殿' } },
+                                                                                                        { id: 'muc', p: 'sqd', lv: 6, a: -160, d: 180, pal: 'green', cnt: '23',  t: { en: 'MUCEM Museum', tc: '地中海文明博物館', yue: '地中海文明博物館', sc: '地中海文明博物馆' } },
+                                                                                                        { id: 'ndg_p', p: 'ndg', lv: 7, a: -200, d: 140, pal: 'green', cnt: '1',  t: { en: 'Panoramas', tc: '全景相', yue: '全景相', sc: '全景相' } },
+                                                                                                        { id: 'muc_p', p: 'muc', lv: 7, a: -160, d: 140, pal: 'green', cnt: '12', t: { en: 'Portraits', tc: '人像', yue: '人像', sc: '人像' } },
+                                                                                                        
+                                                                                                        // Sep 19 Nice -> L5 -> L6
+                                                                                                        { id: 'pda_a', p: 's19', lv: 5, a: -142, d: 185, pal: 'cyan', cnt: '160', t: { en: 'Promenade des Anglais (Afternoon)', tc: '英國人散步大道 (下午)', yue: '英國人散步大道 (晏晝)', sc: '英国人散步大道 (下午)' } },
+                                                                                                        { id: 'pda_n', p: 's19', lv: 5, a: -118, d: 185, pal: 'cyan', cnt: '119', t: { en: 'Promenade des Anglais (Noon)', tc: '英國人散步大道 (正午)', yue: '英國人散步大道 (正午)', sc: '英国人散步大道 (正午)' } },
+                                                                                                        { id: 'tnz', p: 'pda_a', lv: 6, a: -145, d: 185, pal: 'cyan', cnt: '19', t: { en: 'Terrasse Nietzsche & Port', tc: '尼采觀景台 & 尼斯港', yue: '尼采觀景台 & 尼斯港口', sc: '尼采观景台 & 尼斯港' } },
+                                                                                                        { id: 'fen', p: 'pda_n', lv: 6, a: -115, d: 185, pal: 'cyan', cnt: '9',  t: { en: 'Glacier Fenocchio', tc: '百年手工雪糕店', yue: 'Glacier Fenocchio 雪糕', sc: '百年手工冰淇淋店' } },
+                                                                                                        
+                                                                                                        // Sep 16 Marseille-St-Charles -> L5 -> L6
+                                                                                                        { id: 'msc_m', p: 's16', lv: 5, a: -92, d: 180, pal: 'blue', cnt: '116', t: { en: 'Marseille-St-Charles (Afternoon)', tc: '馬賽聖夏爾 (下午)', yue: '馬賽聖夏爾 (晏晝)', sc: '马赛圣夏尔 (下午)' } },
+                                                                                                        { id: 'inv',   p: 'msc_m', lv: 6, a: -92, d: 175, pal: 'blue', cnt: '23', t: { en: 'Invader Pixel Art', tc: '馬賽克街頭藝術', yue: 'Invader 馬賽克藝術', sc: '马赛克街头艺术' } },
+                                                                                                        
+                                                                                                        // Sep 8 & 14 Cannes -> L5 -> L6
+                                                                                                        { id: 'cro', p: 's14', lv: 5, a: -65, d: 185, pal: 'gold', cnt: '80', t: { en: 'La Croisette (Night)', tc: '十字大道 (夜晚)', yue: '十字大道 (夜晚)', sc: '十字大道 (夜晚)' } },
+                                                                                                        { id: 'suq', p: 's14', lv: 5, a: -38, d: 185, pal: 'gold', cnt: '70', t: { en: 'Le Suquet (Dusk)', tc: '蘇給老城區 (黃昏)', yue: '蘇給老城區 (黃昏)', sc: '苏给老城区 (黄昏)' } },
+                                                                                                        { id: 'clk', p: 'cro', lv: 6, a: -65, d: 180, pal: 'gold', cnt: '74', t: { en: 'Notre-Dame Clock Tower', tc: '聖母鐘樓', yue: '聖母鐘樓', sc: '圣母钟楼' } },
+                                                                                                        { id: 'csg', p: 'suq', lv: 6, a: -38, d: 180, pal: 'gold', cnt: '9',  t: { en: 'Cannes Sign', tc: '坎城地標', yue: '康城地標', sc: '戛纳地标' } },
+                                                                                                        
+                                                                                                        // Branch 2: Monaco (302) -> Sep 20 Place Sainte-Dévote -> L5 -> L6 -> L7
+                                                                                                        { id: 'mco', p: 'n0', lv: 2, a: 28, d: 170, pal: 'purple', cnt: '302', t: { en: 'Monaco', tc: '摩納哥', yue: '摩納哥', sc: '摩纳哥' } },
+                                                                                                        { id: 'psd', p: 'mco', lv: 4, a: 28, d: 170, pal: 'purple', cnt: '302', t: { en: 'Sep 20 • Place Sainte-Dévote', tc: '9月20日 • 聖德沃特廣場', yue: '9月20日 • 聖德沃特廣場', sc: '9月20日 • 圣德沃特广场' } },
+                                                                                                        { id: 'mcn', p: 'psd', lv: 5, a: 8,  d: 185, pal: 'purple', cnt: '235', t: { en: 'Monte-Carlo (Noon)', tc: '蒙地卡羅 (正午)', yue: '蒙地卡羅 (正午)', sc: '蒙特卡洛 (正午)' } },
+                                                                                                        { id: 'pha', p: 'psd', lv: 5, a: 48, d: 185, pal: 'purple', cnt: '45',  t: { en: 'Port Hercule (Afternoon)', tc: '赫庫勒斯港 (下午)', yue: '赫庫勒斯港 (晏晝)', sc: '赫库勒斯港 (下午)' } },
+                                                                                                        { id: 'pcc', p: 'mcn', lv: 6, a: 8,  d: 185, pal: 'purple', cnt: '28',  t: { en: 'Prince\'s Car Collection & Casino', tc: '親王古董車收藏 & 賭場廣場', yue: '親王古董車收藏 & 賭場', sc: '亲王古董车收藏 & 赌场' } },
+                                                                                                        { id: 'fhp', p: 'pha', lv: 6, a: 48, d: 185, pal: 'purple', cnt: '7',   t: { en: 'Fairmont Hairpin (F1)', tc: '費爾蒙髮夾彎 (F1賽道)', yue: '費爾蒙髮夾彎 (F1賽道)', sc: '费尔蒙发夹弯 (F1赛道)' } },
+                                                                                                        { id: 'fhp_v', p: 'fhp', lv: 7, a: 48, d: 140, pal: 'purple', cnt: '2', t: { en: 'Videos', tc: '影片', yue: '影片', sc: '视频' } },
+                                                                                                        
+                                                                                                        // Branch 3: Hong Kong (40) -> Sep 29 Sir Cecil's Ride (22) -> L7 Panoramas
+                                                                                                        { id: 'hkg', p: 'n0', lv: 2, a: 145, d: 165, pal: 'orange', cnt: '40', t: { en: 'Hong Kong', tc: '香港', yue: '香港', sc: '香港' } },
+                                                                                                        { id: 'scr', p: 'hkg', lv: 5, a: 145, d: 170, pal: 'orange', cnt: '22', t: { en: 'Sep 29 • Sir Cecil\'s Ride', tc: '9月29日 • 金督馳馬徑', yue: '9月29日 • 金督馳馬徑', sc: '9月29日 • 金督驰马径' } },
+                                                                                                        { id: 'scr_p', p: 'scr', lv: 7, a: 145, d: 145, pal: 'orange', cnt: '1', t: { en: 'Panoramas', tc: '全景相', yue: '全景相', sc: '全景相' } }
+                                                                                                        ])
+                };
+                
+                // --- C. Camera & True AABB Fit Engine ---
+                const stageEl = document.getElementById('canvas-stage');
+                const canvas = document.getElementById('fireworks-canvas');
+                const ctx = canvas.getContext('2d');
+                const worldEl = document.getElementById('camera-world');
+                
+                let width = 0, height = 0, dpr = 1;
+                let camScale = 0.62, targetScale = 0.62;
+                let camX = 0, camY = 0, targetCamX = 0, targetCamY = 0;
+                let isDragging = false, dragStartX = 0, dragStartY = 0;
+                
+                let bloomProgress = 1;
+                let isChaosPhase = false;
+                let chaosFrames = 0;
+                let hoveredId = null;
+                
+                const PARTICLES_TOTAL = 135;
+                let particles = [];
+                let domNodes = new Map();
+                
+                const BACK_SVG_PATH = "M 0,65 L 0,10 Q 0,0 10,0 L 28,0 Q 33,0 36,4.5 Q 38.5,8.5 44,8.5 L 90,8.5 Q 100,8.5 100,18.5 L 100,65 Q 100,75 90,75 L 10,75 Q 0,75 0,65 Z";
+                const FRONT_SVG_PATH = "M 0,27 Q 0,17 10,17 L 90,17 Q 100,17 100,27 L 100,65 Q 100,75 90,75 L 10,75 Q 0,75 0,65 Z";
+                
+                function unitSuffix() {
+                    if (currentLang === 'en') return ' items';
+                    if (currentLang === 'sc') return ' 张';
+                    return ' 張';
+                }
+                
+                function fitCameraToStage(instant = false) {
+                    const nodes = TREES[currentKey];
+                    if (!nodes || !nodes.length || width === 0) return;
+                    
+                    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+                    nodes.forEach(n => {
+                        if (n.x < minX) minX = n.x;
+                        if (n.x > maxX) maxX = n.x;
+                        if (n.y < minY) minY = n.y;
+                        if (n.y > maxY) maxY = n.y;
+                    });
+                    
+                    const cardPadX = 105;
+                    const cardPadY = 85;
+                    const contentW = Math.max(260, (maxX - minX) + cardPadX * 2);
+                    const contentH = Math.max(260, (maxY - minY) + cardPadY * 2);
+                    
+                    const safeW = Math.max(200, width - 36);
+                    const safeH = Math.max(200, height - 36);
+                    
+                    targetScale = Math.min(Math.max(Math.min(safeW / contentW, safeH / contentH) * 0.94, 0.22), 1.15);
+                    
+                    const centerX = (minX + maxX) / 2;
+                    const centerY = (minY + maxY) / 2;
+                    targetCamX = (width / 2) - centerX * targetScale;
+                    targetCamY = (height / 2) - centerY * targetScale;
+                    
+                    if (instant) {
+                        camScale = targetScale;
+                        camX = targetCamX;
+                        camY = targetCamY;
+                    }
+                }
+                
+                function initStardust() {
+                    particles = [];
+                    const nodes = TREES[currentKey];
+                    for (let i = 0; i < PARTICLES_TOTAL; i++) {
+                        const target = nodes[i % nodes.length];
+                        const angle = (i * 2.39996) % (Math.PI * 2);
+                        const radius = 16 + (i % 6) * 7;
+                        particles.push({
+                            x: target.x + Math.cos(angle) * radius,
+                            y: target.y + Math.sin(angle) * radius,
+                            vx: 0,
+                            vy: 0,
+                            targetId: target.id,
+                            angle: angle,
+                            radius: radius,
+                            speed: (0.005 + (i % 5) * 0.002) * (i % 2 === 0 ? 1 : -1),
+                            size: 1.4 + (i % 3) * 0.6
+                        });
+                    }
+                }
+                
+                function renderDOMCards() {
+                    worldEl.innerHTML = '';
+                    domNodes.clear();
+                    const nodes = TREES[currentKey];
+                    const dark = isDark();
+                    
+                    nodes.forEach((n, idx) => {
+                        const el = document.createElement('div');
+                        el.className = 'liquid-node pointer-events-auto';
+                        const p = PALETTE[n.pal] || PALETTE.pink;
+                        const glowColor = dark ? p.fillD : p.fillL;
+                        const rimStroke = dark ? 'rgba(255,255,255,0.38)' : 'rgba(0,0,0,0.20)';
+                        const innerHighlight = dark ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.85)';
+                        const textColor = '#ffffff';
+                        
+                        const bx1 = 22 + ((idx * 19) % 55);
+                        const by1 = 26 + ((idx * 13) % 22);
+                        const bx2 = 68 - ((idx * 17) % 45);
+                        const by2 = 34 + ((idx * 11) % 18);
+                        
+                        const badgeHtml = n.hasChildren
+                        ? `<div class="folder-expand-badge" style="background:${glowColor};">&minus;</div>`
+                        : '';
+                        
+                        el.innerHTML = `
+                        <div class="folder-card-box" style="filter: drop-shadow(0 6px 14px ${glowColor}40);">
+                            <div class="folder-back-glass"></div>
+                    
+                            <div class="folder-photo-pocket">
+                                <svg viewBox="0 0 100 75" class="w-full h-full">
+                                    <defs>
+                                        <linearGradient id="bg_${n.id}" x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stop-color="${p.c2}"/>
+                                            <stop offset="55%" stop-color="${p.c1}"/>
+                                            <stop offset="100%" stop-color="#09090d"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <rect x="4" y="18" width="92" height="53" rx="8" fill="url(#bg_${n.id})" opacity="0.92"/>
+                                    <circle cx="${bx1}" cy="${by1}" r="14" fill="${p.bokeh}" opacity="0.38" filter="blur(5px)"/>
+                                    <circle cx="${bx2}" cy="${by2}" r="9" fill="#ffffff" opacity="0.28" filter="blur(3px)"/>
+                                    <path d="M 4,52 Q 32,${40 + (idx % 10)} 58,49 T 96,44 L 96,71 L 4,71 Z" fill="${glowColor}" opacity="0.32"/>
+                                    <rect x="0" y="34" width="100" height="41" fill="rgba(0,0,0,0.42)"/>
+                                    <path d="M 0,17 L 65,17 L 35,75 L 0,75 Z" fill="rgba(255,255,255,0.11)"/>
+                                </svg>
+                            </div>
+                    
+                            <svg viewBox="0 0 100 75" class="folder-rim-svg">
+                                <path d="${BACK_SVG_PATH}" fill="none" stroke="${rimStroke}" stroke-width="0.9"/>
+                                <path d="${FRONT_SVG_PATH}" fill="none" stroke="${rimStroke}" stroke-width="0.85"/>
+                                <path d="M 8,17.5 L 92,17.5" fill="none" stroke="${innerHighlight}" stroke-width="0.7" opacity="0.75"/>
+                            </svg>
+                    
+                            ${badgeHtml}
+                    
+                            <div class="folder-text absolute inset-0 flex flex-col justify-end px-2 pb-1.5 pointer-events-none z-10">
+                                <div class="text-[10.5px] font-bold leading-[1.12] line-clamp-2 tracking-tight" style="color:${textColor}; text-shadow: 0 1px 3px rgba(0,0,0,0.95);">
+                                    ${n.t[currentLang]}
+                                </div>
+                                <div class="text-[8.5px] font-medium opacity-85 mt-0.5" style="color:${p.bokeh}; text-shadow: 0 1px 2px #000;">
+                                    ${n.cnt}${unitSuffix()}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    el.addEventListener('mouseenter', () => { hoveredId = n.id; });
+                    el.addEventListener('mouseleave', () => { hoveredId = null; });
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        targetScale = Math.max(targetScale, 0.88);
+                        targetCamX = width / 2 - n.x * targetScale;
+                        targetCamY = height / 2 - n.y * targetScale;
+                    });
+                    
+                    worldEl.appendChild(el);
+                    domNodes.set(n.id, { el, node: n });
+                    });
+                }
+                
+                function triggerFireworkBurst() {
+                    isChaosPhase = true;
+                    chaosFrames = 0;
+                    bloomProgress = 0.05;
+                    particles.forEach(p => {
+                        const a = Math.random() * Math.PI * 2;
+                        const s = 7 + Math.random() * 11;
+                        p.vx = Math.cos(a) * s;
+                        p.vy = Math.sin(a) * s;
+                    });
+                    fitCameraToStage(false);
+                }
+                
+                function drawDualRailNeonLine(x1, y1, x2, y2, w1, w2, palKey, alpha, highlight) {
+                    const dx = x2 - x1, dy = y2 - y1;
+                    const len = Math.hypot(dx, dy);
+                    if (len < 1) return;
+                    const nx = -dy / len, ny = dx / len;
+                    const p = PALETTE[palKey] || PALETTE.pink;
+                    const dark = isDark();
+                    const fillCol = dark ? p.fillD : p.fillL;
+                    const strokeCol = dark ? p.strokeD : p.strokeL;
+                    
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(x1 + nx * w1 * 0.5, y1 + ny * w1 * 0.5);
+                    ctx.lineTo(x2 + nx * w2 * 0.5, y2 + ny * w2 * 0.5);
+                    ctx.arc(x2, y2, w2 * 0.5, Math.atan2(ny, nx), Math.atan2(-ny, -nx), false);
+                    ctx.lineTo(x1 - nx * w1 * 0.5, y1 - ny * w1 * 0.5);
+                    ctx.arc(x1, y1, w1 * 0.5, Math.atan2(-ny, -nx), Math.atan2(ny, nx), false);
+                    ctx.closePath();
+                    
+                    const grad = ctx.createLinearGradient(x1, y1, x2, y2);
+                    grad.addColorStop(0, fillCol + (highlight ? 'EE' : 'B8'));
+                    grad.addColorStop(1, fillCol + (highlight ? '99' : '48'));
+                    ctx.fillStyle = grad;
+                    ctx.globalAlpha = alpha;
+                    if (dark) {
+                        ctx.shadowColor = fillCol;
+                        ctx.shadowBlur = highlight ? 12 : 4;
+                    }
+                    ctx.fill();
+                    
+                    ctx.strokeStyle = strokeCol;
+                    ctx.lineWidth = highlight ? 1.8 : 1.15;
+                    ctx.globalAlpha = alpha * (highlight ? 1.0 : 0.85);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+                
+                function animate() {
+                    ctx.clearRect(0, 0, width, height);
+                    
+                    camScale += (targetScale - camScale) * 0.14;
+                    camX += (targetCamX - camX) * 0.14;
+                    camY += (targetCamY - camY) * 0.14;
+                    
+                    if (isChaosPhase) {
+                        chaosFrames++;
+                        if (chaosFrames > 22) isChaosPhase = false;
+                    } else {
+                        bloomProgress += (1 - bloomProgress) * 0.12;
+                        if (bloomProgress > 0.999) bloomProgress = 1;
+                    }
+                    
+                    const nodes = TREES[currentKey];
+                    const nodeMap = new Map();
+                    nodes.forEach(n => nodeMap.set(n.id, n));
+                    
+                    const isMinimalLOD = camScale < 0.32;
+                    domNodes.forEach(({ el, node }) => {
+                        const curX = node.x * bloomProgress;
+                        const curY = node.y * bloomProgress;
+                        const screenX = curX * camScale + camX;
+                        const screenY = curY * camScale + camY;
+                        
+                        el.style.left = `${screenX}px`;
+                        el.style.top = `${screenY}px`;
+                        el.style.transform = `translate(-50%, -62%) scale(${camScale})`;
+                        el.style.opacity = isChaosPhase ? '0.15' : '1';
+                        el.style.zIndex = String(20 + (8 - node.lv));
+                        
+                        const textEl = el.querySelector('.folder-text');
+                        if (textEl) textEl.style.display = isMinimalLOD ? 'none' : 'flex';
+                    });
+                    
+                    ctx.save();
+                    ctx.translate(camX, camY);
+                    ctx.scale(camScale, camScale);
+                    
+                    if (bloomProgress > 0.05) {
+                        nodes.forEach(child => {
+                            if (!child.p) return;
+                            const parent = nodeMap.get(child.p);
+                            if (!parent) return;
+                            
+                            const x1 = parent.x * bloomProgress;
+                            const y1 = parent.y * bloomProgress;
+                            const x2 = child.x * bloomProgress;
+                            const y2 = child.y * bloomProgress;
+                            
+                            const wFrom = Math.max(2.4, 9.5 * Math.pow(0.84, parent.lv));
+                            const wTo = Math.max(1.8, 9.5 * Math.pow(0.84, child.lv));
+                            const highlight = (hoveredId === child.id || hoveredId === parent.id);
+                            
+                            drawDualRailNeonLine(x1, y1, x2, y2, wFrom, wTo, child.pal, bloomProgress, highlight);
+                        });
+                    }
+                    
+                    particles.forEach(p => {
+                        const target = nodeMap.get(p.targetId);
+                        if (isChaosPhase || !target) {
+                            p.x += p.vx;
+                            p.y += p.vy;
+                            p.vx *= 0.92;
+                            p.vy *= 0.92;
+                        } else {
+                            p.angle += p.speed;
+                            const tx = target.x * bloomProgress + Math.cos(p.angle) * p.radius;
+                            const ty = target.y * bloomProgress + Math.sin(p.angle) * p.radius;
+                            p.x += (tx - p.x) * 0.14;
+                            p.y += (ty - p.y) * 0.14;
+                        }
+                        
+                        const pal = target ? (PALETTE[target.pal] || PALETTE.pink) : PALETTE.cyan;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size / Math.sqrt(camScale), 0, Math.PI * 2);
+                        ctx.fillStyle = isDark() ? pal.strokeD : pal.fillL;
+                        ctx.globalAlpha = isChaosPhase ? 0.7 : 0.45;
+                        ctx.fill();
+                    });
+                    
+                    ctx.restore();
+                    requestAnimationFrame(animate);
+                }
+                
+                // --- D. Pan, Wheel Zoom & Controls ---
+                stageEl.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
+                    targetScale = Math.max(0.22, Math.min(1.65, targetScale * zoomFactor));
+                }, { passive: false });
+                
+                stageEl.addEventListener('pointerdown', (e) => {
+                    if (e.target.closest('button')) return;
+                    isDragging = true;
+                    dragStartX = e.clientX - targetCamX;
+                    dragStartY = e.clientY - targetCamY;
+                });
+                
+                window.addEventListener('pointermove', (e) => {
+                    if (!isDragging) return;
+                    targetCamX = e.clientX - dragStartX;
+                    targetCamY = e.clientY - dragStartY;
+                });
+                
+                window.addEventListener('pointerup', () => { isDragging = false; });
+                
+                document.getElementById('zoom-in-btn').addEventListener('click', () => {
+                    targetScale = Math.min(1.65, targetScale * 1.25);
+                });
+                document.getElementById('zoom-out-btn').addEventListener('click', () => {
+                    targetScale = Math.max(0.22, targetScale * 0.80);
+                });
+                document.getElementById('zoom-fit-btn').addEventListener('click', () => fitCameraToStage(false));
+                document.getElementById('firework-btn').addEventListener('click', triggerFireworkBurst);
+                
+                document.querySelectorAll('.cluster-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        currentKey = btn.dataset.cluster;
+                        document.querySelectorAll('.cluster-btn').forEach(b => {
+                            b.className = 'cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/10 dark:hover:bg-white/15 border border-black/5 dark:border-white/10';
+                        });
+                        btn.className = 'cluster-btn whitespace-nowrap px-3.5 lg:px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all bg-amber-400 text-black shadow-[0_0_20px_rgba(251,191,36,0.35)]';
+                        initStardust();
+                        renderDOMCards();
+                        triggerFireworkBurst();
+                    });
+                });
+                
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        currentLang = btn.dataset.lang;
+                        document.querySelectorAll('.lang-btn').forEach(b => {
+                            b.className = 'lang-btn px-2.5 py-1 rounded-full text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-all';
+                        });
+                        btn.className = 'lang-btn px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-400 text-black shadow-sm transition-all';
+                        applyPageLocalization();
+                        renderDOMCards();
+                    });
+                });
+                
+                function handleResize() {
+                    const rect = stageEl.getBoundingClientRect();
+                    dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    width = rect.width;
+                    height = rect.height;
+                    canvas.width = width * dpr;
+                    canvas.height = height * dpr;
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    fitCameraToStage(true);
+                }
+                
+                window.addEventListener('resize', handleResize);
+                
+                // --- E. Loops.so Form Submission ---
+                const waitlistForm = document.getElementById('waitlist-form');
+                const submitBtn = document.getElementById('waitlist-submit');
+                const feedbackEl = document.getElementById('waitlist-feedback');
+                
+                waitlistForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const copy = PAGE_I18N[currentLang] || PAGE_I18N.en;
+                    const email = waitlistForm.querySelector('input[name="email"]').value;
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = copy.ctaJoining;
+                    
+                    fetch(waitlistForm.action, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: 'userGroup=TestFlight_Waitlist&email=' + encodeURIComponent(email)
+                    })
+                    .then(() => {
+                        isFormSubmitted = true;
+                        waitlistForm.reset();
+                        submitBtn.textContent = copy.ctaJoined;
+                        feedbackEl.classList.remove('hidden');
+                    })
+                    .catch(() => {
+                        waitlistForm.submit();
+                    });
+                });
+                
+                // Boot
+                handleResize();
+                applyPageLocalization();
+                initStardust();
+                renderDOMCards();
+                requestAnimationFrame(animate);
+            })();
+        </script>
+    </body>
+</html>
