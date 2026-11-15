@@ -359,7 +359,7 @@
                 <!-- CENTER COLUMN: 8-Level Dandelion Universe + Attached 4-Month Dock -->
                 <div class="order-2 w-full lg:flex-1 flex flex-col items-center">
                     <div class="w-full h-[440px] sm:h-[520px] lg:h-[558px] min-h-[440px] relative">
-                        <div id="canvas-stage" class="stage-glass w-full h-full min-h-[440px] rounded-[42px] relative overflow-hidden select-none touch-none">
+                        <div id="canvas-stage" style="touch-action: none; -webkit-touch-callout: none;" class="stage-glass w-full h-full min-h-[440px] rounded-[42px] relative overflow-hidden select-none touch-none">
                             
                             <!-- Layer 1: Dual-Rail Neon Tension Lines & Stardust Particles -->
                             <canvas id="fireworks-canvas" class="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing"></canvas>
@@ -1161,72 +1161,81 @@
                     requestAnimationFrame(animate);
                 }
                 
-                // --- D. Pan, Wheel Zoom & Mobile Pinch-to-Zoom Controls ---
+                // --- D. Pan, Wheel Zoom & iOS Safari Native Touch Controls ---
                 stageEl.addEventListener('wheel', (e) => {
                     e.preventDefault();
                     const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
                     targetScale = Math.max(0.22, Math.min(1.65, targetScale * zoomFactor));
                 }, { passive: false });
                 
-                let activePointers = new Map();
+                // Desktop Mouse Drag
+                stageEl.addEventListener('mousedown', (e) => {
+                    if (e.target.closest('button')) return;
+                    isDragging = true;
+                    dragStartX = e.clientX - targetCamX;
+                    dragStartY = e.clientY - targetCamY;
+                });
+                window.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    targetCamX = e.clientX - dragStartX;
+                    targetCamY = e.clientY - dragStartY;
+                });
+                window.addEventListener('mouseup', () => { isDragging = false; });
+                
+                // Mobile iOS Safari Native Touch (Blocks Page Scroll & Native Pinch)
+                let touchMode = 'none'; // 'pan' | 'pinch'
                 let initialPinchDist = 0;
                 let initialPinchScale = 1;
                 
-                stageEl.addEventListener('pointerdown', (e) => {
+                stageEl.addEventListener('touchstart', (e) => {
                     if (e.target.closest('button')) return;
-                    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-                    if (activePointers.size === 1) {
-                        isDragging = true;
-                        dragStartX = e.clientX - targetCamX;
-                        dragStartY = e.clientY - targetCamY;
-                    } else if (activePointers.size === 2) {
-                        isDragging = false;
-                        const pts = Array.from(activePointers.values());
-                        initialPinchDist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+                    if (e.touches.length === 1) {
+                        touchMode = 'pan';
+                        dragStartX = e.touches[0].clientX - targetCamX;
+                        dragStartY = e.touches[0].clientY - targetCamY;
+                    } else if (e.touches.length === 2) {
+                        e.preventDefault();
+                        touchMode = 'pinch';
+                        const t0 = e.touches[0], t1 = e.touches[1];
+                        initialPinchDist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
                         initialPinchScale = targetScale;
                     }
-                });
+                }, { passive: false });
                 
-                window.addEventListener('pointermove', (e) => {
-                    if (!activePointers.has(e.pointerId)) return;
-                    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                stageEl.addEventListener('touchmove', (e) => {
+                    if (e.target.closest('button')) return;
+                    e.preventDefault(); // Force block Safari page scroll & native zoom
                     
-                    if (activePointers.size === 2 && initialPinchDist > 0) {
-                        const pts = Array.from(activePointers.values());
-                        const dist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
-                        const ratio = dist / initialPinchDist;
-                        const newScale = Math.max(0.22, Math.min(1.65, initialPinchScale * ratio));
+                    if (e.touches.length === 2 && touchMode === 'pinch' && initialPinchDist > 0) {
+                        const t0 = e.touches[0], t1 = e.touches[1];
+                        const dist = Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
+                        const newScale = Math.max(0.22, Math.min(1.65, initialPinchScale * (dist / initialPinchDist)));
                         
                         const rect = stageEl.getBoundingClientRect();
-                        const midX = ((pts[0].x + pts[1].x) / 2) - rect.left;
-                        const midY = ((pts[0].y + pts[1].y) / 2) - rect.top;
+                        const midX = ((t0.clientX + t1.clientX) / 2) - rect.left;
+                        const midY = ((t0.clientY + t1.clientY) / 2) - rect.top;
                         const worldX = (midX - targetCamX) / targetScale;
                         const worldY = (midY - targetCamY) / targetScale;
                         
                         targetScale = newScale;
                         targetCamX = midX - worldX * targetScale;
                         targetCamY = midY - worldY * targetScale;
-                    } else if (activePointers.size === 1 && isDragging) {
-                        targetCamX = e.clientX - dragStartX;
-                        targetCamY = e.clientY - dragStartY;
+                    } else if (e.touches.length === 1 && touchMode === 'pan') {
+                        targetCamX = e.touches[0].clientX - dragStartX;
+                        targetCamY = e.touches[0].clientY - dragStartY;
+                    }
+                }, { passive: false });
+                
+                stageEl.addEventListener('touchend', (e) => {
+                    if (e.touches.length === 1) {
+                        touchMode = 'pan';
+                        dragStartX = e.touches[0].clientX - targetCamX;
+                        dragStartY = e.touches[0].clientY - targetCamY;
+                    } else if (e.touches.length === 0) {
+                        touchMode = 'none';
+                        initialPinchDist = 0;
                     }
                 });
-                
-                const releasePointer = (e) => {
-                    activePointers.delete(e.pointerId);
-                    if (activePointers.size < 2) initialPinchDist = 0;
-                    if (activePointers.size === 1) {
-                        const remaining = Array.from(activePointers.values())[0];
-                        isDragging = true;
-                        dragStartX = remaining.x - targetCamX;
-                        dragStartY = remaining.y - targetCamY;
-                    } else if (activePointers.size === 0) {
-                        isDragging = false;
-                    }
-                };
-                
-                window.addEventListener('pointerup', releasePointer);
-                window.addEventListener('pointercancel', releasePointer);
                 
                 document.getElementById('zoom-in-btn').addEventListener('click', () => {
                     targetScale = Math.min(1.65, targetScale * 1.25);
