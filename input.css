@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-offload-black: #000000;
+  --color-offload-gray-dark: #1d1d1f;
+  --color-offload-gray-light: #fbfbfd;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "San Francisco", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
+}

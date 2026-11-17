@@ -40,244 +40,227 @@
                                                                                         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                                                                                             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
                                                                                                 
-                                                                                                <!-- Tailwind CSS (CDN for zero-build setup) -->
-                                                                                                <script src="https://cdn.tailwindcss.com"></script>
-                                                                                                
-                                                                                                <script>
-                                                                                                    tailwind.config = {
-                                                                                                        darkMode: 'class',
-                                                                                                        theme: {
-                                                                                                            extend: {
-                                                                                                                fontFamily: {
-                                                                                                                    sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'San Francisco', 'Segoe UI', 'sans-serif'],
-                                                                                                                    mono: ['JetBrains Mono', 'SF Mono', 'Menlo', 'monospace'],
-                                                                                                                },
-                                                                                                                colors: {
-                                                                                                                    'offload-black': '#000000',
-                                                                                                                    'offload-gray-dark': '#1d1d1f',
-                                                                                                                    'offload-gray-light': '#fbfbfd',
-                                                                                                                }
-                                                                                                            }
+                                                                                                <!-- Tailwind CSS (Compiled Static Build) -->
+                                                                                                <link rel="stylesheet" href="styles.css">
+                                                                                                    
+                                                                                                    <script>
+                                                                                                        if (localStorage.getItem('color-theme') === 'light') {
+                                                                                                            document.documentElement.classList.remove('dark');
+                                                                                                        } else {
+                                                                                                            document.documentElement.classList.add('dark');
                                                                                                         }
-                                                                                                    };
+                                                                                                    </script>
                                                                                                     
-                                                                                                    if (localStorage.getItem('color-theme') === 'light') {
-                                                                                                        document.documentElement.classList.remove('dark');
-                                                                                                    } else {
-                                                                                                        document.documentElement.classList.add('dark');
-                                                                                                    }
-                                                                                                </script>
-                                                                                                
-                                                                                                <style>
-                                                                                                    body {
-                                                                                                        transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-                                                                                                        overflow-x: hidden;
-                                                                                                    }
-                                                                                                    
-                                                                                                    /* ==========================================
-                                                                                                     1. Center Interactive Stage Glassmorphism
-                                                                                                     ========================================== */
-                                                                                                    .stage-glass {
-                                                                                                        background: rgba(244, 244, 248, 0.88);
-                                                                                                        backdrop-filter: blur(24px) saturate(180%);
-                                                                                                        -webkit-backdrop-filter: blur(24px) saturate(180%);
-                                                                                                        border: 1px solid rgba(0, 0, 0, 0.08);
-                                                                                                        box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
-                                                                                                    }
-                                                                                                    .dark .stage-glass {
-                                                                                                        background: #030305;
-                                                                                                        border: 1px solid rgba(255, 255, 255, 0.12);
-                                                                                                        box-shadow: 0 30px 80px -20px rgba(0, 229, 255, 0.08), 0 25px 60px -15px rgba(0, 0, 0, 0.95), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
-                                                                                                    }
-                                                                                                    
-                                                                                                    /* ==========================================
-                                                                                                     2. iPhone 18 Pro Hardware Frame (Fixed Absolute Inset)
-                                                                                                     Light Mode: Space Black / Dark Gray Titanium
-                                                                                                     Dark Mode: Brushed Natural Silver Titanium
-                                                                                                     ========================================== */
-                                                                                                    .iphone-18-frame {
-                                                                                                        position: relative;
-                                                                                                        width: 268px;
-                                                                                                        height: 558px;
-                                                                                                        border-radius: 46px;
-                                                                                                        transition: background 0.35s ease, box-shadow 0.35s ease;
-                                                                                                        background: linear-gradient(145deg, #3a3a3f 0%, #18181b 50%, #27272c 100%);
-                                                                                                        box-shadow:
-                                                                                                        0 25px 50px rgba(0, 0, 0, 0.22),
-                                                                                                        0 0 0 1px rgba(255, 255, 255, 0.14) inset;
-                                                                                                    }
-                                                                                                    .dark .iphone-18-frame {
-                                                                                                        background: linear-gradient(145deg, #d4d4d8 0%, #71717a 48%, #a1a1aa 100%);
-                                                                                                        box-shadow:
-                                                                                                        0 30px 60px rgba(0, 0, 0, 0.85),
-                                                                                                        0 0 0 1px rgba(255, 255, 255, 0.55) inset,
-                                                                                                        0 0 20px rgba(255, 255, 255, 0.08);
-                                                                                                    }
-                                                                                                    
-                                                                                                    .iphone-bezel {
-                                                                                                        position: absolute;
-                                                                                                        inset: 3.5px;
-                                                                                                        background: #050505;
-                                                                                                        border-radius: 42.5px;
-                                                                                                        box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.18);
-                                                                                                    }
-                                                                                                    
-                                                                                                    .iphone-screen {
-                                                                                                        position: absolute;
-                                                                                                        inset: 8px;
-                                                                                                        background: radial-gradient(circle at 50% 38%, #161824 0%, #06070a 100%);
-                                                                                                        border-radius: 35px;
-                                                                                                        overflow: hidden;
-                                                                                                        color: #ffffff;
-                                                                                                    }
-                                                                                                    
-                                                                                                    .dynamic-island {
-                                                                                                        position: absolute;
-                                                                                                        top: 10px;
-                                                                                                        left: 50%;
-                                                                                                        transform: translateX(-50%);
-                                                                                                        width: 78px;
-                                                                                                        height: 21px;
-                                                                                                        background: #000000;
-                                                                                                        border-radius: 16px;
-                                                                                                        z-index: 30;
-                                                                                                        display: flex;
-                                                                                                        align-items: center;
-                                                                                                        justify-content: flex-end;
-                                                                                                        padding-right: 6px;
-                                                                                                        box-shadow: 0 1px 2px rgba(255, 255, 255, 0.08);
-                                                                                                    }
-                                                                                                    
-                                                                                                    .camera-lens {
-                                                                                                        width: 8px;
-                                                                                                        height: 8px;
-                                                                                                        border-radius: 50%;
-                                                                                                        background: radial-gradient(circle at 35% 35%, #2b4c7e, #0a1122 65%, #000 100%);
-                                                                                                        border: 1px solid #1a1a1a;
-                                                                                                    }
-                                                                                                    
-                                                                                                    .hw-btn {
-                                                                                                        position: absolute;
-                                                                                                        background: linear-gradient(to bottom, #45454c, #1f1f23);
-                                                                                                        border-radius: 3px;
-                                                                                                    }
-                                                                                                    .dark .hw-btn {
-                                                                                                        background: linear-gradient(to bottom, #d4d4d8, #71717a);
-                                                                                                    }
-                                                                                                    .btn-action { left: -2.5px; top: 90px; width: 2.5px; height: 21px; }
-                                                                                                    .btn-vol-up { left: -2.5px; top: 126px; width: 2.5px; height: 38px; }
-                                                                                                    .btn-vol-down { left: -2.5px; top: 174px; width: 2.5px; height: 38px; }
-                                                                                                    .btn-power { right: -2.5px; top: 138px; width: 2.5px; height: 56px; }
-                                                                                                    .btn-camera-control {
-                                                                                                        position: absolute;
-                                                                                                        right: -2px;
-                                                                                                        top: 298px;
-                                                                                                        width: 2px;
-                                                                                                        height: 42px;
-                                                                                                        background: #27272a;
-                                                                                                        border-radius: 2px;
-                                                                                                        box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.25);
-                                                                                                    }
-                                                                                                    .dark .btn-camera-control {
-                                                                                                        background: #52525b;
-                                                                                                    }
-                                                                                                    
-                                                                                                    .home-indicator {
-                                                                                                        position: absolute;
-                                                                                                        bottom: 7px;
-                                                                                                        left: 50%;
-                                                                                                        transform: translateX(-50%);
-                                                                                                        width: 96px;
-                                                                                                        height: 3.5px;
-                                                                                                        background: rgba(255, 255, 255, 0.8);
-                                                                                                        border-radius: 4px;
-                                                                                                        z-index: 30;
-                                                                                                    }
-                                                                                                    
-                                                                                                    /* ==========================================
-                                                                                                     3. True Liquid Glass Folder Card (1:1 Port of SVGFolderCard.swift)
-                                                                                                     ========================================== */
-                                                                                                    .liquid-node {
-                                                                                                        position: absolute;
-                                                                                                        transform-origin: center center;
-                                                                                                        cursor: pointer;
-                                                                                                        user-select: none;
-                                                                                                        will-change: transform, left, top;
-                                                                                                    }
-                                                                                                    .liquid-node:hover {
-                                                                                                        z-index: 100 !important;
-                                                                                                    }
-                                                                                                    .folder-card-box {
-                                                                                                        position: relative;
-                                                                                                        width: 100px;
-                                                                                                        height: 75px;
-                                                                                                        transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.22s ease;
-                                                                                                    }
-                                                                                                    .liquid-node:hover .folder-card-box {
-                                                                                                        transform: scale(1.14);
-                                                                                                    }
-                                                                                                    
-                                                                                                    /* Layer A: FolderBackShape Glass (Top tab y:0..17 refracts background lines clearly) */
-                                                                                                    .folder-back-glass {
-                                                                                                        position: absolute;
-                                                                                                        inset: 0;
-                                                                                                        clip-path: path('M 0,65 L 0,10 Q 0,0 10,0 L 28,0 Q 33,0 36,4.5 Q 38.5,8.5 44,8.5 L 90,8.5 Q 100,8.5 100,18.5 L 100,65 Q 100,75 90,75 L 10,75 Q 0,75 0,65 Z');
-                                                                                                        background: linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(235, 235, 242, 0.32) 100%);
-                                                                                                        backdrop-filter: blur(12px) saturate(190%);
-                                                                                                        -webkit-backdrop-filter: blur(12px) saturate(190%);
-                                                                                                    }
-                                                                                                    .dark .folder-back-glass {
-                                                                                                        background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(20, 20, 28, 0.28) 100%);
-                                                                                                        backdrop-filter: blur(12px) saturate(200%);
-                                                                                                        -webkit-backdrop-filter: blur(12px) saturate(200%);
-                                                                                                    }
-                                                                                                    
-                                                                                                    /* Layer B: 90x50 Recessed Photo Thumbnail + Blurred Glow + FolderFrontShape Glass Pocket */
-                                                                                                    .folder-photo-pocket {
-                                                                                                        position: absolute;
-                                                                                                        inset: 0;
-                                                                                                        clip-path: path('M 0,27 Q 0,17 10,17 L 90,17 Q 100,17 100,27 L 100,65 Q 100,75 90,75 L 10,75 Q 0,75 0,65 Z');
-                                                                                                        background: rgba(255, 255, 255, 0.22);
-                                                                                                        backdrop-filter: blur(8px) saturate(160%);
-                                                                                                        -webkit-backdrop-filter: blur(8px) saturate(160%);
-                                                                                                        overflow: hidden;
-                                                                                                    }
-                                                                                                    .dark .folder-photo-pocket {
-                                                                                                        background: rgba(18, 18, 24, 0.42);
-                                                                                                        backdrop-filter: blur(8px) saturate(180%);
-                                                                                                        -webkit-backdrop-filter: blur(8px) saturate(180%);
-                                                                                                    }
-                                                                                                    
-                                                                                                    /* Layer C: Specular SVG Rim Overlay */
-                                                                                                    .folder-rim-svg {
-                                                                                                        position: absolute;
-                                                                                                        inset: 0;
-                                                                                                        width: 100px;
-                                                                                                        height: 75px;
-                                                                                                        pointer-events: none;
-                                                                                                        overflow: visible;
-                                                                                                    }
-                                                                                                    
-                                                                                                    /* Layer D: Top-Right Expand Badge (- circle from SVGFolderCard.swift) */
-                                                                                                    .folder-expand-badge {
-                                                                                                        position: absolute;
-                                                                                                        top: 2px;
-                                                                                                        right: -4px;
-                                                                                                        width: 16px;
-                                                                                                        height: 16px;
-                                                                                                        border-radius: 999px;
-                                                                                                        display: flex;
-                                                                                                        align-items: center;
-                                                                                                        justify-content: center;
-                                                                                                        font-size: 11px;
-                                                                                                        font-weight: 900;
-                                                                                                        color: #ffffff;
-                                                                                                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
-                                                                                                        border: 1px solid rgba(255, 255, 255, 0.45);
-                                                                                                        z-index: 10;
-                                                                                                    }
-                                                                                                </style>
-                                                                                            </head>
+                                                                                                    <style>
+                                                                                                        body {
+                                                                                                            transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                                                                                                            overflow-x: hidden;
+                                                                                                        }
+                                                                                                        
+                                                                                                        /* ==========================================
+                                                                                                         1. Center Interactive Stage Glassmorphism
+                                                                                                         ========================================== */
+                                                                                                        .stage-glass {
+                                                                                                            background: rgba(244, 244, 248, 0.88);
+                                                                                                            backdrop-filter: blur(24px) saturate(180%);
+                                                                                                            -webkit-backdrop-filter: blur(24px) saturate(180%);
+                                                                                                            border: 1px solid rgba(0, 0, 0, 0.08);
+                                                                                                            box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+                                                                                                        }
+                                                                                                        .dark .stage-glass {
+                                                                                                            background: #030305;
+                                                                                                            border: 1px solid rgba(255, 255, 255, 0.12);
+                                                                                                            box-shadow: 0 30px 80px -20px rgba(0, 229, 255, 0.08), 0 25px 60px -15px rgba(0, 0, 0, 0.95), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+                                                                                                        }
+                                                                                                        
+                                                                                                        /* ==========================================
+                                                                                                         2. iPhone 18 Pro Hardware Frame (Fixed Absolute Inset)
+                                                                                                         Light Mode: Space Black / Dark Gray Titanium
+                                                                                                         Dark Mode: Brushed Natural Silver Titanium
+                                                                                                         ========================================== */
+                                                                                                        .iphone-18-frame {
+                                                                                                            position: relative;
+                                                                                                            width: 268px;
+                                                                                                            height: 558px;
+                                                                                                            border-radius: 46px;
+                                                                                                            transition: background 0.35s ease, box-shadow 0.35s ease;
+                                                                                                            background: linear-gradient(145deg, #3a3a3f 0%, #18181b 50%, #27272c 100%);
+                                                                                                            box-shadow:
+                                                                                                            0 25px 50px rgba(0, 0, 0, 0.22),
+                                                                                                            0 0 0 1px rgba(255, 255, 255, 0.14) inset;
+                                                                                                        }
+                                                                                                        .dark .iphone-18-frame {
+                                                                                                            background: linear-gradient(145deg, #d4d4d8 0%, #71717a 48%, #a1a1aa 100%);
+                                                                                                            box-shadow:
+                                                                                                            0 30px 60px rgba(0, 0, 0, 0.85),
+                                                                                                            0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+                                                                                                            0 0 20px rgba(255, 255, 255, 0.08);
+                                                                                                        }
+                                                                                                        
+                                                                                                        .iphone-bezel {
+                                                                                                            position: absolute;
+                                                                                                            inset: 3.5px;
+                                                                                                            background: #050505;
+                                                                                                            border-radius: 42.5px;
+                                                                                                            box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.18);
+                                                                                                        }
+                                                                                                        
+                                                                                                        .iphone-screen {
+                                                                                                            position: absolute;
+                                                                                                            inset: 8px;
+                                                                                                            background: radial-gradient(circle at 50% 38%, #161824 0%, #06070a 100%);
+                                                                                                            border-radius: 35px;
+                                                                                                            overflow: hidden;
+                                                                                                            color: #ffffff;
+                                                                                                        }
+                                                                                                        
+                                                                                                        .dynamic-island {
+                                                                                                            position: absolute;
+                                                                                                            top: 10px;
+                                                                                                            left: 50%;
+                                                                                                            transform: translateX(-50%);
+                                                                                                            width: 78px;
+                                                                                                            height: 21px;
+                                                                                                            background: #000000;
+                                                                                                            border-radius: 16px;
+                                                                                                            z-index: 30;
+                                                                                                            display: flex;
+                                                                                                            align-items: center;
+                                                                                                            justify-content: flex-end;
+                                                                                                            padding-right: 6px;
+                                                                                                            box-shadow: 0 1px 2px rgba(255, 255, 255, 0.08);
+                                                                                                        }
+                                                                                                        
+                                                                                                        .camera-lens {
+                                                                                                            width: 8px;
+                                                                                                            height: 8px;
+                                                                                                            border-radius: 50%;
+                                                                                                            background: radial-gradient(circle at 35% 35%, #2b4c7e, #0a1122 65%, #000 100%);
+                                                                                                            border: 1px solid #1a1a1a;
+                                                                                                        }
+                                                                                                        
+                                                                                                        .hw-btn {
+                                                                                                            position: absolute;
+                                                                                                            background: linear-gradient(to bottom, #45454c, #1f1f23);
+                                                                                                            border-radius: 3px;
+                                                                                                        }
+                                                                                                        .dark .hw-btn {
+                                                                                                            background: linear-gradient(to bottom, #d4d4d8, #71717a);
+                                                                                                        }
+                                                                                                        .btn-action { left: -2.5px; top: 90px; width: 2.5px; height: 21px; }
+                                                                                                        .btn-vol-up { left: -2.5px; top: 126px; width: 2.5px; height: 38px; }
+                                                                                                        .btn-vol-down { left: -2.5px; top: 174px; width: 2.5px; height: 38px; }
+                                                                                                        .btn-power { right: -2.5px; top: 138px; width: 2.5px; height: 56px; }
+                                                                                                        .btn-camera-control {
+                                                                                                            position: absolute;
+                                                                                                            right: -2px;
+                                                                                                            top: 298px;
+                                                                                                            width: 2px;
+                                                                                                            height: 42px;
+                                                                                                            background: #27272a;
+                                                                                                            border-radius: 2px;
+                                                                                                            box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.25);
+                                                                                                        }
+                                                                                                        .dark .btn-camera-control {
+                                                                                                            background: #52525b;
+                                                                                                        }
+                                                                                                        
+                                                                                                        .home-indicator {
+                                                                                                            position: absolute;
+                                                                                                            bottom: 7px;
+                                                                                                            left: 50%;
+                                                                                                            transform: translateX(-50%);
+                                                                                                            width: 96px;
+                                                                                                            height: 3.5px;
+                                                                                                            background: rgba(255, 255, 255, 0.8);
+                                                                                                            border-radius: 4px;
+                                                                                                            z-index: 30;
+                                                                                                        }
+                                                                                                        
+                                                                                                        /* ==========================================
+                                                                                                         3. True Liquid Glass Folder Card (1:1 Port of SVGFolderCard.swift)
+                                                                                                         ========================================== */
+                                                                                                        .liquid-node {
+                                                                                                            position: absolute;
+                                                                                                            transform-origin: center center;
+                                                                                                            cursor: pointer;
+                                                                                                            user-select: none;
+                                                                                                            will-change: transform, left, top;
+                                                                                                        }
+                                                                                                        .liquid-node:hover {
+                                                                                                            z-index: 100 !important;
+                                                                                                        }
+                                                                                                        .folder-card-box {
+                                                                                                            position: relative;
+                                                                                                            width: 100px;
+                                                                                                            height: 75px;
+                                                                                                            transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.22s ease;
+                                                                                                        }
+                                                                                                        .liquid-node:hover .folder-card-box {
+                                                                                                            transform: scale(1.14);
+                                                                                                        }
+                                                                                                        
+                                                                                                        /* Layer A: FolderBackShape Glass (Top tab y:0..17 refracts background lines clearly) */
+                                                                                                        .folder-back-glass {
+                                                                                                            position: absolute;
+                                                                                                            inset: 0;
+                                                                                                            clip-path: path('M 0,65 L 0,10 Q 0,0 10,0 L 28,0 Q 33,0 36,4.5 Q 38.5,8.5 44,8.5 L 90,8.5 Q 100,8.5 100,18.5 L 100,65 Q 100,75 90,75 L 10,75 Q 0,75 0,65 Z');
+                                                                                                            background: linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(235, 235, 242, 0.32) 100%);
+                                                                                                            backdrop-filter: blur(12px) saturate(190%);
+                                                                                                            -webkit-backdrop-filter: blur(12px) saturate(190%);
+                                                                                                        }
+                                                                                                        .dark .folder-back-glass {
+                                                                                                            background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(20, 20, 28, 0.28) 100%);
+                                                                                                            backdrop-filter: blur(12px) saturate(200%);
+                                                                                                            -webkit-backdrop-filter: blur(12px) saturate(200%);
+                                                                                                        }
+                                                                                                        
+                                                                                                        /* Layer B: 90x50 Recessed Photo Thumbnail + Blurred Glow + FolderFrontShape Glass Pocket */
+                                                                                                        .folder-photo-pocket {
+                                                                                                            position: absolute;
+                                                                                                            inset: 0;
+                                                                                                            clip-path: path('M 0,27 Q 0,17 10,17 L 90,17 Q 100,17 100,27 L 100,65 Q 100,75 90,75 L 10,75 Q 0,75 0,65 Z');
+                                                                                                            background: rgba(255, 255, 255, 0.22);
+                                                                                                            backdrop-filter: blur(8px) saturate(160%);
+                                                                                                            -webkit-backdrop-filter: blur(8px) saturate(160%);
+                                                                                                            overflow: hidden;
+                                                                                                        }
+                                                                                                        .dark .folder-photo-pocket {
+                                                                                                            background: rgba(18, 18, 24, 0.42);
+                                                                                                            backdrop-filter: blur(8px) saturate(180%);
+                                                                                                            -webkit-backdrop-filter: blur(8px) saturate(180%);
+                                                                                                        }
+                                                                                                        
+                                                                                                        /* Layer C: Specular SVG Rim Overlay */
+                                                                                                        .folder-rim-svg {
+                                                                                                            position: absolute;
+                                                                                                            inset: 0;
+                                                                                                            width: 100px;
+                                                                                                            height: 75px;
+                                                                                                            pointer-events: none;
+                                                                                                            overflow: visible;
+                                                                                                        }
+                                                                                                        
+                                                                                                        /* Layer D: Top-Right Expand Badge (- circle from SVGFolderCard.swift) */
+                                                                                                        .folder-expand-badge {
+                                                                                                            position: absolute;
+                                                                                                            top: 2px;
+                                                                                                            right: -4px;
+                                                                                                            width: 16px;
+                                                                                                            height: 16px;
+                                                                                                            border-radius: 999px;
+                                                                                                            display: flex;
+                                                                                                            align-items: center;
+                                                                                                            justify-content: center;
+                                                                                                            font-size: 11px;
+                                                                                                            font-weight: 900;
+                                                                                                            color: #ffffff;
+                                                                                                            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+                                                                                                            border: 1px solid rgba(255, 255, 255, 0.45);
+                                                                                                            z-index: 10;
+                                                                                                        }
+                                                                                                    </style>
+                                                                                                </head>
     
     <body class="antialiased bg-offload-gray-light text-offload-gray-dark dark:bg-offload-black dark:text-[#f5f5f7] selection:bg-cyan-500/20 selection:text-cyan-600 dark:selection:bg-cyan-400/30 dark:selection:text-white min-h-screen flex flex-col justify-between">
         
@@ -498,6 +481,9 @@
                 <p id="waitlist-feedback" class="text-xs font-medium text-emerald-500 mt-3 hidden">
                 🎉 You're on the list! We'll send your TestFlight invite soon.
                 </p>
+                <p id="i18n-beta-note" class="text-[11px] text-gray-400 dark:text-gray-500 mt-2.5 tracking-wide">
+                Limited to first 100 beta testers • Built for iOS 26 &amp; Apple Intelligence
+                </p>
             </div>
             
         </main>
@@ -505,11 +491,12 @@
         <!-- 6. Footer -->
         <footer class="py-8 px-6 border-t border-black/5 dark:border-white/10 transition-colors">
             <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
-                <p id="i18n-footer-left">Built by an indie developer. Zero cloud—your photos go straight from iPhone to your external drive.</p>
-                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+                <p id="i18n-footer-left" class="sm:whitespace-nowrap">© 2026 OffloadAI. Built by an indie developer. 100% On-Device. Zero Cloud.</p>
+                <div class="flex items-center justify-center gap-5 sm:gap-6 sm:whitespace-nowrap">
                     <a id="i18n-footer-privacy" href="privacy.html" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a>
+                    <a id="i18n-footer-support" href="mailto:support@offloadai.space" class="font-medium hover:text-black dark:hover:text-white transition-colors">Support</a>
                     <a href="https://x.com/offloadai_app" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-black dark:hover:text-white transition-colors">
-                        <span id="i18n-footer-right">Follow the journey on X:</span> <span class="text-cyan-600 dark:text-cyan-400">@offloadai_app</span>
+                        <span id="i18n-footer-right">X</span> <span class="text-cyan-600 dark:text-cyan-400">@offloadai_app</span>
                     </a>
                 </div>
             </div>
@@ -536,9 +523,11 @@
                         ctaJoining: "Joining...",
                         ctaJoined: "Joined ✅",
                         ctaFeedback: "🎉 You're on the list! We'll send your TestFlight invite soon.",
-                        footerLeft: "Built by an indie developer. Zero cloud—your photos go straight from iPhone to your external drive.",
+                        betaNote: "Limited to first 100 beta testers • Built for iOS 26 & Apple Intelligence",
+                        footerLeft: "© 2026 OffloadAI. Built by an indie developer. 100% On-Device. Zero Cloud.",
                         footerPrivacy: "Privacy Policy",
-                        footerRight: "Follow the journey on X:",
+                        footerSupport: "Support",
+                        footerRight: "X",
                         fitLabel: "Fit"
                     },
                     tc: {
@@ -555,9 +544,11 @@
                         ctaJoining: "提交中...",
                         ctaJoined: "已加入 ✅",
                         ctaFeedback: "🎉 成功加入名單！我們將盡快寄出 TestFlight 邀請。",
-                        footerLeft: "由獨立開發者打造。零雲端上傳——相片直接從 iPhone 匯出至你的外置硬碟。",
+                        betaNote: "首批限量 100 名測試員 • 專為 iOS 26 與 Apple Intelligence 打造",
+                        footerLeft: "© 2026 OffloadAI. 由獨立開發者打造。100% 本機運算，零雲端上傳。",
                         footerPrivacy: "私隱政策",
-                        footerRight: "在 X 追蹤開發日誌：",
+                        footerSupport: "技術支援",
+                        footerRight: "X",
                         fitLabel: "置中"
                     },
                     yue: {
@@ -574,9 +565,11 @@
                         ctaJoining: "登記緊...",
                         ctaJoined: "搞掂 ✅",
                         ctaFeedback: "🎉 已經幫你留咗位！TestFlight 一準備好即刻通知你。",
-                        footerLeft: "由獨立開發者打造。零雲端上傳——相片直接由 iPhone 過落你隻 外置硬碟。",
+                        betaNote: "首批限量 100 個測試名額 • 專為 iOS 26 同 Apple Intelligence 打造",
+                        footerLeft: "© 2026 OffloadAI. 由獨立開發者打造。100% 本機運算，零雲端上傳。",
                         footerPrivacy: "私隱政策",
-                        footerRight: "喺 X 追蹤開發進度：",
+                        footerSupport: "技術支援",
+                        footerRight: "X",
                         fitLabel: "全圖"
                     },
                     sc: {
@@ -593,9 +586,11 @@
                         ctaJoining: "提交中...",
                         ctaJoined: "已加入 ✅",
                         ctaFeedback: "🎉 成功加入名单！我们将尽快寄出 TestFlight 邀请。",
-                        footerLeft: "由独立开发者打造。零云端上传——照片直接从 iPhone 导出至你的外置硬盘。",
+                        betaNote: "首批限量 100 名测试员 • 专为 iOS 26 与 Apple Intelligence 打造",
+                        footerLeft: "© 2026 OffloadAI. 由独立开发者打造。100% 本机运算，零云端上传。",
                         footerPrivacy: "隐私政策",
-                        footerRight: "在 X 追踪开发日志：",
+                        footerSupport: "技术支持",
+                        footerRight: "X",
                         fitLabel: "全图"
                     }
                 };
@@ -650,8 +645,10 @@
                     document.getElementById('i18n-email-input').placeholder = copy.emailPlaceholder;
                     document.getElementById('waitlist-submit').textContent = isFormSubmitted ? copy.ctaJoined : copy.ctaBtn;
                     document.getElementById('waitlist-feedback').textContent = copy.ctaFeedback;
+                    document.getElementById('i18n-beta-note').textContent = copy.betaNote;
                     document.getElementById('i18n-footer-left').textContent = copy.footerLeft;
                     document.getElementById('i18n-footer-privacy').textContent = copy.footerPrivacy;
+                    document.getElementById('i18n-footer-support').textContent = copy.footerSupport;
                     document.getElementById('i18n-footer-right').textContent = copy.footerRight;
                     document.getElementById('zoom-fit-btn').textContent = copy.fitLabel;
                     
